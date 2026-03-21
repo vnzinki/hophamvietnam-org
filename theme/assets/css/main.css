@@ -119,45 +119,48 @@ h1, h2, h3, h4, h5, h6 {
     overflow: hidden;
 }
 
-/* Bronze drum centered watermark */
+/* Dong Son bronze drum pattern — full background */
 .plaque-drum-watermark {
     position: absolute;
     inset: 0;
-    background: url('../images/bronze-drum.png') no-repeat center center;
-    background-size: 130px;
-    opacity: 0.18;
+    background: url('../images/drum-pattern-bg.svg') repeat;
+    background-size: 240px 100px;
+    opacity: 0.3;
     pointer-events: none;
     z-index: 0;
-    filter: sepia(1) saturate(3) brightness(1.5) hue-rotate(-10deg);
 }
 
 /* Dong Son triangle band — horizontal borders */
 .plaque-border-top,
 .plaque-border-bottom {
     position: absolute;
-    left: 24px;
-    right: 24px;
-    height: 16px;
+    left: 8px;
+    right: 8px;
+    height: 18px;
     background: url('../images/drum-border.svg') repeat-x;
+    background-size: auto 18px;
     pointer-events: none;
     z-index: 0;
+    opacity: 0.5;
 }
-.plaque-border-top { top: 5px; }
-.plaque-border-bottom { bottom: 5px; }
+.plaque-border-top { top: 4px; }
+.plaque-border-bottom { bottom: 4px; }
 
 /* Dong Son triangle band — vertical side borders */
 .plaque-pattern-left,
 .plaque-pattern-right {
     position: absolute;
-    top: 20px;
-    bottom: 20px;
-    width: 16px;
+    top: 22px;
+    bottom: 22px;
+    width: 18px;
     background: url('../images/drum-border-v.svg') repeat-y;
+    background-size: 18px auto;
     pointer-events: none;
     z-index: 0;
+    opacity: 0.5;
 }
-.plaque-pattern-left { left: 5px; }
-.plaque-pattern-right { right: 5px; transform: scaleX(-1); }
+.plaque-pattern-left { left: 4px; }
+.plaque-pattern-right { right: 4px; transform: scaleX(-1); }
 
 /* Ornamental gold inner border */
 .plaque-frame::before {
