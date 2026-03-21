@@ -9,11 +9,17 @@
 <?php wp_body_open(); ?>
 
 <header class="site-header">
-    <div class="header-inner">
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo">
-            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-img">
-            <span class="logo-text"><?php bloginfo('name'); ?></span>
-        </a>
+    <div class="plaque-frame">
+        <div class="plaque-corner plaque-corner-tl"></div>
+        <div class="plaque-corner plaque-corner-tr"></div>
+        <div class="plaque-corner plaque-corner-bl"></div>
+        <div class="plaque-corner plaque-corner-br"></div>
+        <div class="header-inner">
+            <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo">
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-img">
+                <span class="logo-text"><?php bloginfo('name'); ?></span>
+            </a>
+        </div>
     </div>
     <nav class="main-nav">
         <div class="nav-inner">
