@@ -1,32 +1,6 @@
 <?php get_header(); ?>
 
 <?php
-// ── "Tin Hot" breaking news ticker ──
-$ticker_posts = new WP_Query([
-    'posts_per_page'      => 8,
-    'post_status'         => 'publish',
-    'ignore_sticky_posts' => true,
-    'orderby'             => 'date',
-    'order'               => 'DESC',
-]);
-?>
-
-<?php if ($ticker_posts->have_posts()) : ?>
-<div class="ticker-bar">
-    <div class="container ticker-inner">
-        <span class="ticker-label">TIN HOT</span>
-        <div class="ticker-track">
-            <div class="ticker-items">
-                <?php while ($ticker_posts->have_posts()) : $ticker_posts->the_post(); ?>
-                    <a href="<?php the_permalink(); ?>" class="ticker-item"><?php the_title(); ?></a>
-                <?php endwhile; ?>
-            </div>
-        </div>
-    </div>
-</div>
-<?php endif; wp_reset_postdata(); ?>
-
-<?php
 // Hero section: featured posts slider + latest news sidebar
 $featured = new WP_Query([
     'posts_per_page'      => 4,

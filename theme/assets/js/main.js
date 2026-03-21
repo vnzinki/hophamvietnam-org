@@ -4,7 +4,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     initSlider();
     initMobileMenu();
-    initTicker();
     initSearchOverlay();
 });
 
@@ -81,15 +80,6 @@ function initMobileMenu() {
             toggle.classList.remove('is-active');
         }
     });
-}
-
-/* ─── Ticker: duplicate items for seamless scroll ─────────── */
-function initTicker() {
-    const items = document.querySelector('.ticker-items');
-    if (!items) return;
-    // Clone all children and append for seamless infinite scroll
-    const clone = items.innerHTML;
-    items.innerHTML += clone;
 }
 
 /* ─── Search Overlay ──────────────────────────────────────── */
