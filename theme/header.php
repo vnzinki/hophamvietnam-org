@@ -12,6 +12,7 @@
     <div class="header-inner">
         <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo">
             <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-img">
+            <span class="logo-text"><?php bloginfo('name'); ?></span>
         </a>
     </div>
     <nav class="main-nav">
