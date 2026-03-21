@@ -1,0 +1,61 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  wordpress:
+    build: .
+    image: hopham-wordpress:local
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+      WORDPRESS_CONFIG_EXTRA: |
+        if ( ! defined( 'WP_DEBUG' ) )         define( 'WP_DEBUG', true );
+        if ( ! defined( 'WP_DEBUG_LOG' ) )      define( 'WP_DEBUG_LOG', true );
+        if ( ! defined( 'WP_DEBUG_DISPLAY' ) )  define( 'WP_DEBUG_DISPLAY', false );
+        if ( ! defined( 'SCRIPT_DEBUG' ) )      define( 'SCRIPT_DEBUG', true );
+        if ( ! defined( 'WP_SITEURL' ) )        define( 'WP_SITEURL', 'http://localhost:8080' );
+        if ( ! defined( 'WP_HOME' ) )           define( 'WP_HOME', 'http://localhost:8080' );
+    volumes:
+      - ./theme:/var/www/html/wp-content/themes/hopham-vietnam
+      - ./uploads:/var/www/html/wp-content/uploads
+      - plugins_data:/var/www/html/wp-content/plugins
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+
+volumes:
+  db_data:
+  plugins_data:

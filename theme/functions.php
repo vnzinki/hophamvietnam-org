@@ -107,13 +107,25 @@ add_action('template_redirect', 'hopham_track_post_views');
 
 /* ─── Helper: Get Popular Posts ───────────────────────────── */
 function hopham_get_popular_posts($count = 5) {
-    return new WP_Query([
-        'posts_per_page' => $count,
-        'meta_key'       => 'hopham_post_views',
-        'orderby'        => 'meta_value_num',
-        'order'          => 'DESC',
-        'post_status'    => 'publish',
+    $query = new WP_Query([
+        'posts_per_page'      => $count,
+        'meta_key'            => 'hopham_post_views',
+        'orderby'             => 'meta_value_num',
+        'order'               => 'DESC',
+        'post_status'         => 'publish',
+        'ignore_sticky_posts' => true,
     ]);
+
+    // Fallback to recent posts if no viewed posts found
+    if (!$query->have_posts()) {
+        $query = new WP_Query([
+            'posts_per_page'      => $count,
+            'post_status'         => 'publish',
+            'ignore_sticky_posts' => true,
+        ]);
+    }
+
+    return $query;
 }
 
 /* ─── Helper: Format Vietnamese Date ──────────────────────── */

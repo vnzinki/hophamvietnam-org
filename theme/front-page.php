@@ -1,16 +1,44 @@
 <?php get_header(); ?>
 
 <?php
+// ── "Tin Hot" breaking news ticker ──
+$ticker_posts = new WP_Query([
+    'posts_per_page'      => 8,
+    'post_status'         => 'publish',
+    'ignore_sticky_posts' => true,
+    'orderby'             => 'date',
+    'order'               => 'DESC',
+]);
+?>
+
+<?php if ($ticker_posts->have_posts()) : ?>
+<div class="ticker-bar">
+    <div class="container ticker-inner">
+        <span class="ticker-label">TIN HOT</span>
+        <div class="ticker-track">
+            <div class="ticker-items">
+                <?php while ($ticker_posts->have_posts()) : $ticker_posts->the_post(); ?>
+                    <a href="<?php the_permalink(); ?>" class="ticker-item"><?php the_title(); ?></a>
+                <?php endwhile; ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; wp_reset_postdata(); ?>
+
+<?php
 // Hero section: featured posts slider + latest news sidebar
 $featured = new WP_Query([
-    'posts_per_page' => 4,
-    'post_status'    => 'publish',
-    'meta_key'       => '_thumbnail_id',
+    'posts_per_page'      => 4,
+    'post_status'         => 'publish',
+    'meta_key'            => '_thumbnail_id',
+    'ignore_sticky_posts' => true,
 ]);
 $latest = new WP_Query([
-    'posts_per_page' => 3,
-    'post_status'    => 'publish',
-    'offset'         => 4,
+    'posts_per_page'      => 3,
+    'post_status'         => 'publish',
+    'offset'              => 4,
+    'ignore_sticky_posts' => true,
 ]);
 ?>
 
@@ -66,11 +94,12 @@ $latest = new WP_Query([
 </section>
 
 <?php
-// Người Họ Phạm section — posts from 'nguoi-ho-pham' category (fallback to latest)
+// Người Họ Phạm section
 $nguoi_cat = get_category_by_slug('nguoi-ho-pham');
 $nguoi_args = [
-    'posts_per_page' => 2,
-    'post_status'    => 'publish',
+    'posts_per_page'      => 5,
+    'post_status'         => 'publish',
+    'ignore_sticky_posts' => true,
 ];
 if ($nguoi_cat) {
     $nguoi_args['cat'] = $nguoi_cat->term_id;
@@ -86,22 +115,41 @@ $popular = hopham_get_popular_posts(4);
         <div class="col-main">
             <div class="section-header">
                 <h2 class="section-title"><span class="title-deco">❧</span> Người Họ Phạm</h2>
+                <?php if ($nguoi_cat) : ?>
+                    <a href="<?php echo esc_url(get_category_link($nguoi_cat->term_id)); ?>" class="section-more">Xem tất cả →</a>
+                <?php endif; ?>
             </div>
-            <?php if ($nguoi_posts->have_posts()) : ?>
+            <?php if ($nguoi_posts->have_posts()) : $count = 0; ?>
                 <?php while ($nguoi_posts->have_posts()) : $nguoi_posts->the_post(); ?>
-                    <article class="card card-horizontal">
-                        <?php if (has_post_thumbnail()) : ?>
-                            <a href="<?php the_permalink(); ?>" class="card-thumb">
-                                <?php the_post_thumbnail('hopham-card'); ?>
+                    <?php if ($count === 0) : ?>
+                        <article class="card card-horizontal card-featured">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <a href="<?php the_permalink(); ?>" class="card-thumb">
+                                    <?php the_post_thumbnail('hopham-card'); ?>
+                                </a>
+                            <?php endif; ?>
+                            <div class="card-body">
+                                <h3 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                                <div class="card-excerpt"><?php the_excerpt(); ?></div>
+                                <a href="<?php the_permalink(); ?>" class="read-more">Đọc tiếp →</a>
+                            </div>
+                        </article>
+                        <div class="post-list-small">
+                    <?php else : ?>
+                        <article class="post-list-item">
+                            <a href="<?php the_permalink(); ?>">
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <?php the_post_thumbnail('hopham-thumb', ['class' => 'post-list-thumb']); ?>
+                                <?php endif; ?>
+                                <div class="post-list-info">
+                                    <h4><?php the_title(); ?></h4>
+                                    <time><?php echo hopham_vn_date(); ?></time>
+                                </div>
                             </a>
-                        <?php endif; ?>
-                        <div class="card-body">
-                            <h3 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                            <div class="card-excerpt"><?php the_excerpt(); ?></div>
-                            <a href="<?php the_permalink(); ?>" class="read-more">Thêm một ngày →</a>
-                        </div>
-                    </article>
+                        </article>
+                    <?php endif; $count++; ?>
                 <?php endwhile; ?>
+                        </div><!-- .post-list-small -->
             <?php else : ?>
                 <p class="no-posts">Chưa có bài viết nào trong mục này.</p>
             <?php endif; wp_reset_postdata(); ?>
@@ -128,7 +176,6 @@ $popular = hopham_get_popular_posts(4);
                         </article>
                     <?php endwhile; ?>
                 <?php endif; wp_reset_postdata(); ?>
-                <a href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))); ?>" class="widget-more">Xem thêm →</a>
             </div>
         </aside>
     </div>
@@ -136,10 +183,14 @@ $popular = hopham_get_popular_posts(4);
 
 <?php
 // Hoạt Động Dòng Họ section
-$hoatdong_cat = get_category_by_slug('hoat-dong-dong-ho');
+$hoatdong_cat = get_category_by_slug('hoat-dong');
+if (!$hoatdong_cat) {
+    $hoatdong_cat = get_category_by_slug('hoat-dong-dong-ho');
+}
 $hoatdong_args = [
-    'posts_per_page' => 3,
-    'post_status'    => 'publish',
+    'posts_per_page'      => 3,
+    'post_status'         => 'publish',
+    'ignore_sticky_posts' => true,
 ];
 if ($hoatdong_cat) {
     $hoatdong_args['cat'] = $hoatdong_cat->term_id;
@@ -160,6 +211,9 @@ $recent_comments = get_comments([
         <div class="col-main">
             <div class="section-header">
                 <h2 class="section-title"><span class="title-deco">❧</span> Hoạt Động Dòng Họ</h2>
+                <?php if ($hoatdong_cat) : ?>
+                    <a href="<?php echo esc_url(get_category_link($hoatdong_cat->term_id)); ?>" class="section-more">Xem tất cả →</a>
+                <?php endif; ?>
             </div>
             <?php if ($hoatdong->have_posts()) : $count = 0; ?>
                 <?php while ($hoatdong->have_posts()) : $hoatdong->the_post(); ?>
@@ -173,7 +227,7 @@ $recent_comments = get_comments([
                             <div class="card-body">
                                 <h3 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                                 <div class="card-excerpt"><?php the_excerpt(); ?></div>
-                                <a href="<?php the_permalink(); ?>" class="read-more">Thêm một ngày →</a>
+                                <a href="<?php the_permalink(); ?>" class="read-more">Đọc tiếp →</a>
                             </div>
                         </article>
                         <div class="card-grid">
@@ -187,12 +241,12 @@ $recent_comments = get_comments([
                             <div class="card-body">
                                 <h3 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                                 <div class="card-excerpt"><?php the_excerpt(); ?></div>
-                                <a href="<?php the_permalink(); ?>" class="read-more">Thêm một ngày →</a>
+                                <a href="<?php the_permalink(); ?>" class="read-more">Đọc tiếp →</a>
                             </div>
                         </article>
                     <?php endif; $count++; ?>
                 <?php endwhile; ?>
-                    </div><!-- .card-grid -->
+                        </div><!-- .card-grid -->
             <?php else : ?>
                 <p class="no-posts">Chưa có bài viết nào trong mục này.</p>
             <?php endif; wp_reset_postdata(); ?>
@@ -213,20 +267,132 @@ $recent_comments = get_comments([
                             <div class="comment-body">
                                 <strong class="comment-author"><?php echo esc_html($comment->comment_author); ?></strong>
                                 <p class="comment-text"><?php echo wp_trim_words($comment->comment_content, 15, '…'); ?></p>
-                                <span class="comment-count">
-                                    <?php
-                                    $ccount = get_comments_number($comment->comment_post_ID);
-                                    echo $ccount . ' comments';
-                                    ?>
-                                </span>
+                                <a href="<?php echo esc_url(get_comment_link($comment)); ?>" class="comment-link">
+                                    <?php echo esc_html(get_the_title($comment->comment_post_ID)); ?>
+                                </a>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
-                <a href="#" class="widget-more">Xem thêm →</a>
             </div>
         </aside>
     </div>
 </section>
+
+<?php
+// Vấn Tổ Tầm Tông section
+$vantotamtong_cat = get_category_by_slug('van-to-tam-tong');
+if ($vantotamtong_cat) :
+    $vttt_posts = new WP_Query([
+        'posts_per_page'      => 6,
+        'post_status'         => 'publish',
+        'cat'                 => $vantotamtong_cat->term_id,
+        'ignore_sticky_posts' => true,
+    ]);
+?>
+
+<!-- ══════ VẤN TỔ TẦM TÔNG ══════ -->
+<section class="section-category section-vantotamtong">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title"><span class="title-deco">❧</span> Vấn Tổ Tầm Tông</h2>
+            <a href="<?php echo esc_url(get_category_link($vantotamtong_cat->term_id)); ?>" class="section-more">Xem tất cả →</a>
+        </div>
+        <?php if ($vttt_posts->have_posts()) : $count = 0; ?>
+            <div class="category-layout">
+                <div class="cat-featured">
+                    <?php while ($vttt_posts->have_posts() && $count < 2) : $vttt_posts->the_post(); ?>
+                        <article class="card card-vertical">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <a href="<?php the_permalink(); ?>" class="card-thumb">
+                                    <?php the_post_thumbnail('hopham-card'); ?>
+                                </a>
+                            <?php endif; ?>
+                            <div class="card-body">
+                                <h3 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                                <div class="card-excerpt"><?php the_excerpt(); ?></div>
+                                <a href="<?php the_permalink(); ?>" class="read-more">Đọc tiếp →</a>
+                            </div>
+                        </article>
+                    <?php $count++; endwhile; ?>
+                </div>
+                <div class="cat-list">
+                    <?php while ($vttt_posts->have_posts()) : $vttt_posts->the_post(); ?>
+                        <article class="post-list-item">
+                            <a href="<?php the_permalink(); ?>">
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <?php the_post_thumbnail('hopham-thumb', ['class' => 'post-list-thumb']); ?>
+                                <?php endif; ?>
+                                <div class="post-list-info">
+                                    <h4><?php the_title(); ?></h4>
+                                    <time><?php echo hopham_vn_date(); ?></time>
+                                </div>
+                            </a>
+                        </article>
+                    <?php endwhile; ?>
+                </div>
+            </div>
+        <?php endif; wp_reset_postdata(); ?>
+    </div>
+</section>
+<?php endif; ?>
+
+<?php
+// Thư Viện section
+$thuvien_cat = get_category_by_slug('thu-vien');
+if ($thuvien_cat) :
+    $tv_posts = new WP_Query([
+        'posts_per_page'      => 6,
+        'post_status'         => 'publish',
+        'cat'                 => $thuvien_cat->term_id,
+        'ignore_sticky_posts' => true,
+    ]);
+?>
+
+<!-- ══════ THƯ VIỆN ══════ -->
+<section class="section-category section-thuvien">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title"><span class="title-deco">❧</span> Thư Viện</h2>
+            <a href="<?php echo esc_url(get_category_link($thuvien_cat->term_id)); ?>" class="section-more">Xem tất cả →</a>
+        </div>
+        <?php if ($tv_posts->have_posts()) : $count = 0; ?>
+            <div class="category-layout">
+                <div class="cat-featured">
+                    <?php while ($tv_posts->have_posts() && $count < 2) : $tv_posts->the_post(); ?>
+                        <article class="card card-vertical">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <a href="<?php the_permalink(); ?>" class="card-thumb">
+                                    <?php the_post_thumbnail('hopham-card'); ?>
+                                </a>
+                            <?php endif; ?>
+                            <div class="card-body">
+                                <h3 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                                <div class="card-excerpt"><?php the_excerpt(); ?></div>
+                                <a href="<?php the_permalink(); ?>" class="read-more">Đọc tiếp →</a>
+                            </div>
+                        </article>
+                    <?php $count++; endwhile; ?>
+                </div>
+                <div class="cat-list">
+                    <?php while ($tv_posts->have_posts()) : $tv_posts->the_post(); ?>
+                        <article class="post-list-item">
+                            <a href="<?php the_permalink(); ?>">
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <?php the_post_thumbnail('hopham-thumb', ['class' => 'post-list-thumb']); ?>
+                                <?php endif; ?>
+                                <div class="post-list-info">
+                                    <h4><?php the_title(); ?></h4>
+                                    <time><?php echo hopham_vn_date(); ?></time>
+                                </div>
+                            </a>
+                        </article>
+                    <?php endwhile; ?>
+                </div>
+            </div>
+        <?php endif; wp_reset_postdata(); ?>
+    </div>
+</section>
+<?php endif; ?>
 
 <?php get_footer(); ?>

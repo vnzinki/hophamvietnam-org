@@ -26,15 +26,24 @@
         </div>
 
         <div class="footer-col footer-links">
-            <h4>Liên Kết</h4>
+            <h4>Chuyên Mục</h4>
             <?php
-            wp_nav_menu([
-                'theme_location' => 'footer',
-                'container'      => false,
-                'menu_class'     => 'footer-menu',
-                'depth'          => 1,
-                'fallback_cb'    => 'hopham_footer_fallback_menu',
-            ]);
+            $footer_cats = [
+                'thong-bao', 'hoat-dong', 'nguoi-ho-pham',
+                'van-to-tam-tong', 'thu-vien',
+            ];
+            echo '<ul class="footer-categories">';
+            foreach ($footer_cats as $slug) {
+                $cat = get_category_by_slug($slug);
+                if ($cat) {
+                    echo '<li>';
+                    echo '<a href="' . esc_url(get_category_link($cat->term_id)) . '">';
+                    echo esc_html($cat->name);
+                    echo '<span class="cat-count">' . (int) $cat->count . '</span>';
+                    echo '</a></li>';
+                }
+            }
+            echo '</ul>';
             ?>
         </div>
 
@@ -57,16 +66,3 @@
 <?php wp_footer(); ?>
 </body>
 </html>
-<?php
-
-function hopham_footer_fallback_menu() {
-    echo '<ul class="footer-menu">';
-    $links = [
-        'Trang Chủ', 'Tin Tức', 'Người Họ Phạm',
-        'Văn Hóa', 'Gia Phả', 'Thư Viện', 'Liên Hệ',
-    ];
-    foreach ($links as $link) {
-        echo '<li><a href="#">' . $link . '</a></li>';
-    }
-    echo '</ul>';
-}

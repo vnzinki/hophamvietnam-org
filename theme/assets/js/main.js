@@ -4,6 +4,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     initSlider();
     initMobileMenu();
+    initTicker();
+    initSearchOverlay();
 });
 
 /* ─── Hero Slider ─────────────────────────────────────────── */
@@ -73,11 +75,45 @@ function initMobileMenu() {
         toggle.classList.toggle('is-active');
     });
 
-    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.main-nav')) {
             menu.classList.remove('is-open');
             toggle.classList.remove('is-active');
         }
+    });
+}
+
+/* ─── Ticker: duplicate items for seamless scroll ─────────── */
+function initTicker() {
+    const items = document.querySelector('.ticker-items');
+    if (!items) return;
+    // Clone all children and append for seamless infinite scroll
+    const clone = items.innerHTML;
+    items.innerHTML += clone;
+}
+
+/* ─── Search Overlay ──────────────────────────────────────── */
+function initSearchOverlay() {
+    const toggle  = document.querySelector('.nav-search-toggle');
+    const overlay = document.getElementById('searchOverlay');
+    const close   = document.querySelector('.search-close');
+    if (!toggle || !overlay) return;
+
+    toggle.addEventListener('click', () => {
+        overlay.classList.add('is-open');
+        const input = overlay.querySelector('.search-field');
+        if (input) input.focus();
+    });
+
+    if (close) {
+        close.addEventListener('click', () => overlay.classList.remove('is-open'));
+    }
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.classList.remove('is-open');
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') overlay.classList.remove('is-open');
     });
 }
