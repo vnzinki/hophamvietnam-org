@@ -11,8 +11,7 @@
 <header class="site-header">
     <div class="header-inner">
         <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo">
-            <span class="logo-icon">☸</span>
-            <span class="logo-text"><?php bloginfo('name'); ?></span>
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-img">
         </a>
     </div>
     <nav class="main-nav">
