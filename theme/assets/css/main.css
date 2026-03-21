@@ -333,16 +333,18 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 2rem 1.5rem 1.2rem;
-    background: linear-gradient(transparent, rgba(26,10,0,0.9));
+    padding: 2.5rem 1.5rem 1.4rem;
+    background: linear-gradient(transparent 0%, rgba(26,10,0,0.5) 30%, rgba(26,10,0,0.92) 100%);
 }
 
 .slide-caption h2 {
     color: var(--white);
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+    font-weight: 700;
     font-family: var(--font-heading);
-    text-shadow: 0 2px 6px rgba(0,0,0,0.5);
-    line-height: 1.4;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8), 0 3px 8px rgba(0,0,0,0.6);
+    line-height: 1.45;
+    letter-spacing: 0.01em;
 }
 
 .slider-dots {
