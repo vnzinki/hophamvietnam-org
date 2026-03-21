@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="40" viewBox="0 0 16 40">
+  <!-- Dong Son drum vertical sawtooth band — side borders -->
+  <polygon points="16,0 0,10 16,20" fill="none" stroke="#C8A84E" stroke-width="1.2" opacity="0.5"/>
+  <polygon points="16,20 0,30 16,40" fill="none" stroke="#C8A84E" stroke-width="1.2" opacity="0.5"/>
+  <circle cx="10" cy="10" r="1.5" fill="#C8A84E" opacity="0.3"/>
+  <circle cx="10" cy="30" r="1.5" fill="#C8A84E" opacity="0.3"/>
+  <line x1="15.5" y1="0" x2="15.5" y2="40" stroke="#C8A84E" stroke-width="0.8" opacity="0.35"/>
+  <line x1="0.5" y1="0" x2="0.5" y2="40" stroke="#C8A84E" stroke-width="0.8" opacity="0.35"/>
+</svg>

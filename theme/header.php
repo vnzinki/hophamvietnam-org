@@ -10,6 +10,11 @@
 
 <header class="site-header">
     <div class="plaque-frame">
+        <div class="plaque-drum-watermark"></div>
+        <div class="plaque-pattern-left"></div>
+        <div class="plaque-pattern-right"></div>
+        <div class="plaque-border-top"></div>
+        <div class="plaque-border-bottom"></div>
         <div class="plaque-corner plaque-corner-tl"></div>
         <div class="plaque-corner plaque-corner-tr"></div>
         <div class="plaque-corner plaque-corner-bl"></div>
