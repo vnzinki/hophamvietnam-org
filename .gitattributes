@@ -1,2 +1,2 @@
-*.dmp filter=lfs diff=lfs merge=lfs -text
 *.dump filter=lfs diff=lfs merge=lfs -text
+*.dmp filter=lfs diff=lfs merge=lfs -text
