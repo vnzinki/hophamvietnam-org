@@ -32,16 +32,16 @@
                 <span class="person-role">Chủ tịch</span>
                 <span class="person-name">Ts. Phạm Vũ Câu</span>
                 <span class="person-contact">
-                    <a href="tel:0913241718"><span class="ic">☎</span> 0913 241 718</a>
-                    <a href="mailto:cauphamvu@gmail.com"><span class="ic">✉</span> Email</a>
+                    <a href="tel:0913241718"><svg class="pc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>0913 241 718</a>
+                    <a href="mailto:cauphamvu@gmail.com"><svg class="pc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>Email</a>
                 </span>
             </div>
             <div class="footer-person">
                 <span class="person-role">Tổng biên tập</span>
                 <span class="person-name">Phạm Duy Hưng</span>
                 <span class="person-contact">
-                    <a href="tel:0981188968"><span class="ic">☎</span> 0981 188 968</a>
-                    <a href="mailto:tttlhpvn@gmail.com"><span class="ic">✉</span> Email</a>
+                    <a href="tel:0981188968"><svg class="pc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>0981 188 968</a>
+                    <a href="mailto:tttlhpvn@gmail.com"><svg class="pc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>Email</a>
                 </span>
             </div>
         </div>
