@@ -1897,20 +1897,22 @@ h1, h2, h3, h4, h5, h6 {
 
 .search-overlay {
     display: none;
-    width: 100%;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 400px;
     background: var(--brown-darkest);
-    border-top: 1px solid rgba(200,168,78,0.15);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    border: 1px solid rgba(200,168,78,0.2);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+    z-index: 1000;
 }
 
-.search-overlay.is-open { display: flex; }
+.search-overlay.is-open { display: block; }
 
 .search-overlay-inner {
-    width: 100%;
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0.6rem 1.5rem;
-    position: relative;
+    padding: 0.6rem 0.75rem;
     display: flex;
     align-items: center;
 }
@@ -1925,11 +1927,11 @@ h1, h2, h3, h4, h5, h6 {
     flex: 1;
     padding: 0.6rem 1rem;
     font-size: 0.95rem;
-    border: 1px solid rgba(200,168,78,0.3);
-    border-right: none;
+    border: 1px solid rgba(200,168,78,0.3) !important;
+    border-right: none !important;
     border-radius: var(--radius) 0 0 var(--radius);
-    background: rgba(255,255,255,0.08);
-    color: var(--cream);
+    background: #2C1810 !important;
+    color: var(--cream) !important;
     font-family: var(--font-body);
     outline: none;
     color-scheme: dark;
@@ -1942,8 +1944,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .search-overlay .search-field:focus {
-    border-color: var(--gold);
-    background: rgba(255,255,255,0.12);
+    border-color: var(--gold) !important;
+    background: #3A2218 !important;
 }
 
 .search-overlay .search-submit {
@@ -2083,8 +2085,20 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     /* Search adjustments for mobile */
+    .search-overlay {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        border-radius: 0;
+        border: none;
+        border-top: 1px solid rgba(200,168,78,0.15);
+        box-shadow: none;
+    }
+    .search-overlay.is-open { display: flex; }
     .search-overlay-inner {
         padding: 0.5rem 0.75rem;
+        flex: 1;
     }
     .search-overlay .search-field {
         font-size: 0.9rem;
