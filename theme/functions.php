@@ -53,13 +53,30 @@ function hopham_widgets_init() {
     register_sidebar([
         'name'          => __('Sidebar Chính', 'hopham-vietnam'),
         'id'            => 'sidebar-main',
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'before_widget' => '<div id="%1$s" class="widget-box widget %2$s">',
         'after_widget'  => '</div>',
-        'before_title'  => '<h3 class="widget-title">',
-        'after_title'   => '</h3>',
+        'before_title'  => '<div class="widget-header"><span class="widget-icon">✦</span><h3>',
+        'after_title'   => '</h3></div>',
     ]);
 }
 add_action('widgets_init', 'hopham_widgets_init');
+
+/* Translate default widget titles to Vietnamese */
+function hopham_translate_widget_titles($title) {
+    $translations = [
+        'Recent Comments' => 'Bình Luận Gần Đây',
+        'Recent Posts'    => 'Bài Viết Mới',
+        'Categories'      => 'Danh Mục',
+        'Archives'        => 'Lưu Trữ',
+        'Meta'            => 'Quản Trị',
+        'Search'          => 'Tìm Kiếm',
+        'Pages'           => 'Trang',
+        'Calendar'        => 'Lịch',
+        'Tag Cloud'       => 'Thẻ',
+    ];
+    return $translations[$title] ?? $title;
+}
+add_filter('widget_title', 'hopham_translate_widget_titles');
 
 /* ─── Custom Excerpt Length ───────────────────────────────── */
 function hopham_excerpt_length($length) {
