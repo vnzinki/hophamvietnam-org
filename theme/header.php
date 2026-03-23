@@ -9,23 +9,45 @@
 <?php wp_body_open(); ?>
 
 <header class="site-header">
-    <div class="plaque-frame">
-        <div class="plaque-drum-watermark"></div>
-        <div class="plaque-pattern-left"></div>
-        <div class="plaque-pattern-right"></div>
-        <div class="plaque-border-top"></div>
-        <div class="plaque-border-bottom"></div>
-        <div class="plaque-corner plaque-corner-tl"></div>
-        <div class="plaque-corner plaque-corner-tr"></div>
-        <div class="plaque-corner plaque-corner-bl"></div>
-        <div class="plaque-corner plaque-corner-br"></div>
-        <div class="header-inner">
-            <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-img">
-                <span class="logo-text"><?php bloginfo('name'); ?></span>
-            </a>
-        </div>
+    <!-- Dragon watermark — Eastern Dragon (Wikimedia Commons, CC0 Public Domain) -->
+    <div class="header-dragon-watermark" aria-hidden="true">
+        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/dragon-eastern-art.svg'); ?>" alt="">
     </div>
+
+    <!-- Gold ornamental frame -->
+    <div class="header-frame" aria-hidden="true">
+        <div class="frame-corner frame-corner-tl"></div>
+        <div class="frame-corner frame-corner-tr"></div>
+        <div class="frame-corner frame-corner-bl"></div>
+        <div class="frame-corner frame-corner-br"></div>
+    </div>
+
+    <!-- Vietnamese Dragon ornaments (Wikimedia Commons, CC-BY-SA 4.0, by Goran tek-en) -->
+    <div class="header-dragon header-dragon-left" aria-hidden="true">
+        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/vietnamese-dragon-gold.svg'); ?>" alt="">
+    </div>
+    <div class="header-dragon header-dragon-right" aria-hidden="true">
+        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/vietnamese-dragon-gold.svg'); ?>" alt="">
+    </div>
+
+    <!-- Central temple plaque -->
+    <div class="temple-plaque">
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo">
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.png'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-img">
+            <span class="logo-text"><?php bloginfo('name'); ?></span>
+        </a>
+    </div>
+
+    <!-- Gold ornamental divider -->
+    <div class="header-divider" aria-hidden="true">
+        <span class="divider-dot"></span>
+        <span class="divider-line"></span>
+        <span class="divider-diamond"></span>
+        <span class="divider-line"></span>
+        <span class="divider-dot"></span>
+    </div>
+
+    <!-- Main navigation -->
     <nav class="main-nav">
         <div class="nav-inner">
             <button class="menu-toggle" aria-label="Menu">

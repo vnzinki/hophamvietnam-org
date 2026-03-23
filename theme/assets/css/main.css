@@ -80,183 +80,230 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 1.5rem;
 }
 
-/* ─── Decorative Textures (CSS-only) ─────────────────────── */
-.wood-texture {
-    background:
-        linear-gradient(135deg, rgba(60,26,0,0.12) 25%, transparent 25%),
-        linear-gradient(225deg, rgba(60,26,0,0.08) 25%, transparent 25%),
-        linear-gradient(45deg,  rgba(60,26,0,0.06) 25%, transparent 25%),
-        linear-gradient(315deg, rgba(60,26,0,0.1)  25%, transparent 25%),
-        linear-gradient(180deg, #3C1A00 0%, #2C1810 30%, #1A0A00 100%);
-}
-
 /* ═══════════════════════════════════════════════════════════
-   HEADER — Ancient Horizontal Plaque (Hoành Phi)
+   HEADER — Ancient Dragon Wood Carving (SVG Vector Design)
+   ═══════════════════════════════════════════════════════════
+   Dragon SVG assets sourced from the internet:
+   - vietnamese-dragon-gold.svg — Wikimedia Commons, CC-BY-SA 4.0, by Goran tek-en
+   - dragon-eastern-art.svg    — Wikimedia Commons, CC0 Public Domain
+   - dragon-banner.svg         — Wikimedia Commons, CC0 Public Domain
    ═══════════════════════════════════════════════════════════ */
+
 .site-header {
-    background: linear-gradient(180deg, #1A0A00 0%, #2C1810 100%);
+    /* Simulated ancient lacquered wood — pure CSS gradient */
+    background:
+        /* Wood grain lines */
+        repeating-linear-gradient(
+            180deg,
+            transparent 0px,
+            transparent 2px,
+            rgba(92,46,0,0.04) 2px,
+            rgba(92,46,0,0.04) 4px
+        ),
+        /* Deep lacquered wood gradient */
+        radial-gradient(ellipse at 50% 30%, #4A2000 0%, #3C1A00 35%, #2C1200 60%, #1A0800 100%);
     text-align: center;
     padding: 0;
     position: relative;
-}
-
-.plaque-frame {
-    position: relative;
-    margin: 0 auto;
-    padding: 1.8rem 2rem 1rem;
-    background:
-        /* Deep lacquered wood gradient */
-        radial-gradient(ellipse at 50% 40%, #5C2E10 0%, #4A2000 30%, #3A1800 55%, #2C1200 80%, #1A0800 100%);
-    border: 3px solid;
-    border-image: linear-gradient(
-        180deg,
-        #D4A843 0%, #C8A84E 20%, #A07828 50%, #C8A84E 80%, #D4A843 100%
-    ) 1;
-    box-shadow:
-        inset 0 0 40px rgba(0,0,0,0.4),
-        inset 0 0 80px rgba(74,32,0,0.3),
-        0 4px 20px rgba(0,0,0,0.6);
     overflow: hidden;
+    /* Subtle inner glow like aged temple wood */
+    box-shadow:
+        inset 0 0 80px rgba(0,0,0,0.3),
+        inset 0 0 120px rgba(74,32,0,0.15);
 }
 
-/* Dong Son bronze drum — Chim Lạc birds watermark (from real Trống Đồng) */
-.plaque-drum-watermark {
+/* ─── Dragon Watermark (Eastern Dragon, CC0) ─────────────── */
+.header-dragon-watermark {
     position: absolute;
-    inset: 0;
-    background: url('../images/drum-pattern-bg.svg') repeat;
-    background-size: 400px auto;
-    opacity: 0.15;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: auto;
     pointer-events: none;
     z-index: 0;
-    mix-blend-mode: screen;
+    opacity: 0.04;
+}
+.header-dragon-watermark img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: brightness(3) sepia(1) saturate(0.3);
 }
 
-/* Dong Son geometric band — horizontal borders (real drum pattern) */
-.plaque-border-top,
-.plaque-border-bottom {
+/* ─── Gold Ornamental Frame ──────────────────────────────── */
+.header-frame {
     position: absolute;
-    left: 8px;
-    right: 8px;
-    height: 22px;
-    background: url('../images/drum-border.svg') repeat-x;
-    background-size: auto 22px;
+    inset: 8px;
+    border: 2px solid;
+    border-image: linear-gradient(
+        135deg,
+        #D4A843 0%, #A07828 25%, #C8A84E 50%, #A07828 75%, #D4A843 100%
+    ) 1;
+    z-index: 5;
     pointer-events: none;
-    z-index: 1;
-    opacity: 0.45;
 }
-.plaque-border-top { top: 4px; }
-.plaque-border-bottom { bottom: 4px; }
 
-/* Dong Son geometric band — vertical side borders */
-.plaque-pattern-left,
-.plaque-pattern-right {
-    position: absolute;
-    top: 26px;
-    bottom: 26px;
-    width: 22px;
-    background: url('../images/drum-border-v.svg') repeat-y;
-    background-size: 22px auto;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.45;
-}
-.plaque-pattern-left { left: 4px; }
-.plaque-pattern-right { right: 4px; transform: scaleX(-1); }
-
-/* Ornamental gold inner border */
-.plaque-frame::before {
+/* Inner subtle border */
+.header-frame::before {
     content: '';
     position: absolute;
-    top: 6px;
-    left: 6px;
-    right: 6px;
-    bottom: 6px;
-    border: 1.5px solid rgba(200,168,78,0.35);
-    pointer-events: none;
+    inset: 4px;
+    border: 1px solid rgba(200,168,78,0.18);
 }
 
-/* Decorative corner flourishes */
-.plaque-corner {
+/* ─── Corner Flourishes ──────────────────────────────────── */
+.frame-corner {
     position: absolute;
-    width: 32px;
-    height: 32px;
-    z-index: 1;
+    width: 44px;
+    height: 44px;
+    z-index: 6;
+    pointer-events: none;
 }
-.plaque-corner::before,
-.plaque-corner::after {
+.frame-corner::before,
+.frame-corner::after {
     content: '';
     position: absolute;
-    background: var(--gold);
+    background: linear-gradient(135deg, #D4A843, #A07828);
     border-radius: 1px;
 }
-/* Horizontal bar of corner */
-.plaque-corner::before {
-    width: 24px;
-    height: 2px;
+.frame-corner::before {
+    width: 30px;
+    height: 2.5px;
 }
-/* Vertical bar of corner */
-.plaque-corner::after {
-    width: 2px;
-    height: 24px;
+.frame-corner::after {
+    width: 2.5px;
+    height: 30px;
 }
-/* Corner diamond accent */
-.plaque-corner-tl { top: 10px; left: 10px; }
-.plaque-corner-tl::before { top: 0; left: 0; }
-.plaque-corner-tl::after { top: 0; left: 0; }
 
-.plaque-corner-tr { top: 10px; right: 10px; }
-.plaque-corner-tr::before { top: 0; right: 0; }
-.plaque-corner-tr::after { top: 0; right: 0; }
+.frame-corner-tl { top: 2px; left: 2px; }
+.frame-corner-tl::before { top: 0; left: 0; }
+.frame-corner-tl::after  { top: 0; left: 0; }
 
-.plaque-corner-bl { bottom: 10px; left: 10px; }
-.plaque-corner-bl::before { bottom: 0; left: 0; }
-.plaque-corner-bl::after { bottom: 0; left: 0; }
+.frame-corner-tr { top: 2px; right: 2px; }
+.frame-corner-tr::before { top: 0; right: 0; }
+.frame-corner-tr::after  { top: 0; right: 0; }
 
-.plaque-corner-br { bottom: 10px; right: 10px; }
-.plaque-corner-br::before { bottom: 0; right: 0; }
-.plaque-corner-br::after { bottom: 0; right: 0; }
+.frame-corner-bl { bottom: 2px; left: 2px; }
+.frame-corner-bl::before { bottom: 0; left: 0; }
+.frame-corner-bl::after  { bottom: 0; left: 0; }
 
-.header-inner {
-    padding: 0.8rem 0 0.5rem;
-    position: relative;
+.frame-corner-br { bottom: 2px; right: 2px; }
+.frame-corner-br::before { bottom: 0; right: 0; }
+.frame-corner-br::after  { bottom: 0; right: 0; }
+
+/* ─── Vietnamese Dragon Ornaments (CC-BY-SA 4.0) ─────────── */
+.header-dragon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 320px;
+    height: auto;
+    pointer-events: none;
     z-index: 1;
+    opacity: 0.18;
+}
+.header-dragon img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Monochrome gold — blend into wood */
+    filter: sepia(1) saturate(0.6) brightness(1.4) contrast(0.9);
+    mix-blend-mode: screen;
+}
+.header-dragon-left {
+    left: -40px;
+    transform: translateY(-50%) scaleX(-1);
+}
+.header-dragon-right {
+    right: -40px;
+    transform: translateY(-50%);
+}
+
+/* ─── Central Temple Plaque ──────────────────────────────── */
+.temple-plaque {
+    position: relative;
+    z-index: 4;
+    padding: 2.2rem 2rem 1.2rem;
 }
 
 .site-logo {
     display: inline-flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.2rem;
     text-decoration: none;
+    position: relative;
 }
 
 .logo-img {
-    height: 75px;
+    height: 80px;
     width: auto;
     display: block;
-    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+    filter:
+        drop-shadow(0 0 15px rgba(200,168,78,0.25))
+        drop-shadow(0 2px 8px rgba(0,0,0,0.6));
 }
 
 .logo-text {
     font-family: var(--font-heading);
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 900;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     color: var(--gold);
     text-shadow:
-        0 0 8px rgba(200,168,78,0.4),
-        0 2px 4px rgba(0,0,0,0.7),
-        0 0 30px rgba(200,168,78,0.15);
+        0 0 12px rgba(200,168,78,0.3),
+        0 0 40px rgba(200,168,78,0.1),
+        0 2px 4px rgba(0,0,0,0.8),
+        1px 1px 0 rgba(160,120,40,0.25);
     text-transform: uppercase;
     line-height: 1.2;
+}
+
+/* ─── Gold Ornamental Divider ────────────────────────────── */
+.header-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 3rem 1.8rem;
+    position: relative;
+    z-index: 4;
+}
+
+.divider-line {
+    flex: 1;
+    max-width: 180px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.5;
+}
+
+.divider-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.4;
+}
+
+.divider-diamond {
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    opacity: 0.5;
+    margin: 0 0.5rem;
+    box-shadow: 0 0 8px rgba(200,168,78,0.3);
 }
 
 /* ─── Main Navigation ─────────────────────────────────────── */
 .main-nav {
     background:
+        /* Subtle wood grain */
         repeating-linear-gradient(
             90deg,
-            rgba(255,255,255,0.015) 0px,
-            rgba(255,255,255,0.015) 1px,
+            rgba(255,255,255,0.012) 0px,
+            rgba(255,255,255,0.012) 1px,
             transparent 1px,
             transparent 3px
         ),
@@ -270,6 +317,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
     display: flex;
     justify-content: center;
+    position: relative;
 }
 
 .nav-menu {
@@ -283,12 +331,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-menu li a {
     display: block;
-    padding: 0.85rem 1.5rem;
+    padding: 0.9rem 1.6rem;
     color: var(--cream);
     font-family: var(--font-body);
     font-size: 0.95rem;
     font-weight: 500;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
     transition: all 0.3s;
     position: relative;
 }
@@ -300,7 +348,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 50%;
     width: 0;
     height: 2px;
-    background: var(--gold);
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
     transition: all 0.3s;
     transform: translateX(-50%);
 }
@@ -308,12 +356,12 @@ h1, h2, h3, h4, h5, h6 {
 .nav-menu li a:hover,
 .nav-menu li.current-menu-item a {
     color: var(--gold);
-    background: rgba(200,168,78,0.08);
+    background: rgba(200,168,78,0.06);
 }
 
 .nav-menu li a:hover::after,
 .nav-menu li.current-menu-item a::after {
-    width: 60%;
+    width: 70%;
 }
 
 /* Sub-menu */
@@ -327,7 +375,7 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 100;
     list-style: none;
     border-top: 2px solid var(--gold-dark);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
 }
 
 .nav-menu li:hover > .sub-menu { display: block; }
@@ -354,36 +402,6 @@ h1, h2, h3, h4, h5, h6 {
     height: 2px;
     background: var(--gold);
     transition: 0.3s;
-}
-
-/* Chim Lạc decorative band — Dong Son bronze drum birds */
-.chim-lac-band {
-    height: 32px;
-    background:
-        url('../images/drum-chim-lac-strip.svg') repeat-x center,
-        linear-gradient(180deg, #1A0A00 0%, #2C1200 40%, #3A1800 100%);
-    background-size: auto 32px, auto;
-    border-top: 1px solid rgba(200,168,78,0.25);
-    border-bottom: 2px solid rgba(200,168,78,0.3);
-    opacity: 0.65;
-    position: relative;
-}
-.chim-lac-band::before,
-.chim-lac-band::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 60px;
-    z-index: 1;
-}
-.chim-lac-band::before {
-    left: 0;
-    background: linear-gradient(90deg, #1A0A00 0%, transparent 100%);
-}
-.chim-lac-band::after {
-    right: 0;
-    background: linear-gradient(270deg, #1A0A00 0%, transparent 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1022,6 +1040,36 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--gold-light);
 }
 
+/* ─── Chim Lạc Decorative Band (Footer) ──────────────────── */
+.chim-lac-band {
+    height: 32px;
+    background:
+        url('../images/drum-chim-lac-strip.svg') repeat-x center,
+        linear-gradient(180deg, #1A0A00 0%, #2C1200 40%, #3A1800 100%);
+    background-size: auto 32px, auto;
+    border-top: 1px solid rgba(200,168,78,0.25);
+    border-bottom: 2px solid rgba(200,168,78,0.3);
+    opacity: 0.65;
+    position: relative;
+}
+.chim-lac-band::before,
+.chim-lac-band::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    z-index: 1;
+}
+.chim-lac-band::before {
+    left: 0;
+    background: linear-gradient(90deg, #1A0A00, transparent);
+}
+.chim-lac-band::after {
+    right: 0;
+    background: linear-gradient(270deg, #1A0A00, transparent);
+}
+
 /* ═══════════════════════════════════════════════════════════
    FOOTER
    ═══════════════════════════════════════════════════════════ */
@@ -1370,6 +1418,10 @@ h1, h2, h3, h4, h5, h6 {
    RESPONSIVE
    ═══════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
+    .header-dragon { width: 240px; opacity: 0.12; }
+    .header-dragon-left { left: -30px; }
+    .header-dragon-right { right: -30px; }
+    .dragon-carving-showcase { padding: 0 2rem 1.5rem; }
     .hero-grid {
         grid-template-columns: 1fr;
     }
@@ -1397,9 +1449,14 @@ h1, h2, h3, h4, h5, h6 {
         --section-pad: 2rem 0;
     }
 
-    .logo-img { height: 60px; }
-    .logo-text { font-size: 1.5rem; letter-spacing: 0.08em; }
-    .plaque-frame { padding: 1.4rem 1.5rem 0.8rem; }
+    .header-dragon { display: none; }
+    .header-dragon-watermark { width: 200px; }
+
+    .temple-plaque { padding: 1.5rem 1.5rem 0.8rem; }
+    .logo-img { height: 65px; }
+    .logo-text { font-size: 1.6rem; letter-spacing: 0.08em; }
+    .header-divider { padding: 0 2rem 1.2rem; }
+    .header-frame { inset: 5px; }
 
     /* Show mobile menu toggle */
     .menu-toggle { display: flex; }
@@ -1447,12 +1504,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 480px) {
-    .logo-img { height: 48px; }
-    .logo-text { font-size: 1.2rem; letter-spacing: 0.05em; }
-    .plaque-frame { padding: 1.2rem 1rem 0.6rem; }
-    .plaque-corner { width: 22px; height: 22px; }
-    .plaque-corner::before { width: 16px; }
-    .plaque-corner::after { height: 16px; }
+    .logo-img { height: 50px; }
+    .logo-text { font-size: 1.25rem; letter-spacing: 0.05em; }
+    .temple-plaque { padding: 1.2rem 1rem 0.6rem; }
+    .header-divider { padding: 0 1.5rem 1rem; }
+    .divider-line { max-width: 100px; }
+    .header-frame { inset: 4px; }
+    .frame-corner { width: 24px; height: 24px; }
+    .frame-corner::before { width: 16px; }
+    .frame-corner::after { height: 16px; }
     .section-title { font-size: 1.3rem; }
     .slide-img,
     .slide-placeholder { height: 200px; }
