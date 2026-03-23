@@ -38,8 +38,13 @@ services:
         if ( ! defined( 'WP_DEBUG_LOG' ) )      define( 'WP_DEBUG_LOG', true );
         if ( ! defined( 'WP_DEBUG_DISPLAY' ) )  define( 'WP_DEBUG_DISPLAY', false );
         if ( ! defined( 'SCRIPT_DEBUG' ) )      define( 'SCRIPT_DEBUG', true );
-        if ( ! defined( 'WP_SITEURL' ) )        define( 'WP_SITEURL', 'http://localhost:8080' );
-        if ( ! defined( 'WP_HOME' ) )           define( 'WP_HOME', 'http://localhost:8080' );
+        if ( isset( $$_SERVER['HTTP_HOST'] ) ) {
+          define( 'WP_SITEURL', 'http://' . $$_SERVER['HTTP_HOST'] );
+          define( 'WP_HOME',    'http://' . $$_SERVER['HTTP_HOST'] );
+        } else {
+          define( 'WP_SITEURL', 'http://localhost:8080' );
+          define( 'WP_HOME',    'http://localhost:8080' );
+        }
     volumes:
       - ./theme:/var/www/html/wp-content/themes/hopham-vietnam
       - ./uploads:/var/www/html/wp-content/uploads
