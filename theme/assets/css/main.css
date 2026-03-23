@@ -2327,7 +2327,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 768px) {
     :root {
-        --section-pad: 2rem 0.5rem;
+        --section-pad: 1.5rem 0.75rem;
     }
 
     .container {
@@ -2337,7 +2337,7 @@ h1, h2, h3, h4, h5, h6 {
     .section-nguoi > .container,
     .section-hoatdong > .container,
     .section-category > .container {
-        padding: 0.75rem;
+        padding: 1rem;
     }
 
     .header-dragon { display: none; }
@@ -2411,6 +2411,8 @@ h1, h2, h3, h4, h5, h6 {
         display: none;
     }
 
+    .hero-section { padding: 1.25rem 0; }
+
     .slide-img,
     .slide-placeholder { height: 250px; }
     .slide-caption h2 { font-size: 1.1rem; }
@@ -2424,12 +2426,13 @@ h1, h2, h3, h4, h5, h6 {
     .card-grid { grid-template-columns: 1fr; }
     .cat-featured { grid-template-columns: 1fr; }
 
-    /* Reduce grid gap on mobile — less empty space between stacked columns */
-    .two-col { gap: 0.5rem; }
+    /* Reduce grid gap on mobile — balanced spacing between stacked columns */
+    .two-col { gap: 1.5rem; }
 
-    /* Reduce card bottom margin on mobile */
-    .card { margin-bottom: 0.75rem; }
-    .card-grid { gap: 0.75rem; }
+    /* Consistent card and widget spacing */
+    .card { margin-bottom: 1rem; }
+    .card-grid { gap: 1rem; }
+    .widget-box { margin-bottom: 1rem; }
 
     .footer-inner { grid-template-columns: 1fr; gap: 1.5rem; }
     .footer-about { grid-column: auto; }
@@ -2511,6 +2514,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 480px) {
+    :root {
+        --section-pad: 1.25rem 0.5rem;
+    }
+
+    .section-nguoi > .container,
+    .section-hoatdong > .container,
+    .section-category > .container {
+        padding: 0.75rem;
+    }
+
+    .two-col { gap: 1.25rem; }
+
     .logo-img { height: 50px; }
     .logo-text { font-size: 1.4rem; letter-spacing: 0.05em; }
     .temple-plaque { padding: 1.2rem 1rem 0.6rem; }
