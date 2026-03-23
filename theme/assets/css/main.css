@@ -38,7 +38,7 @@
 
     /* Spacing */
     --gap:            1.5rem;
-    --section-pad:    3rem 0;
+    --section-pad:    3rem 1.5rem;
     --container-max:  1200px;
     --radius:         6px;
 }
@@ -1952,7 +1952,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 768px) {
     :root {
-        --section-pad: 2rem 0;
+        --section-pad: 2rem 1rem;
     }
 
     .header-dragon { display: none; }
