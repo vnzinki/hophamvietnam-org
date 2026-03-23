@@ -1611,41 +1611,102 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
 }
 
-/* Chim Lạc band is defined in the header section and reused here at footer top */
-
 .footer-inner {
     max-width: var(--container-max);
     margin: 0 auto;
-    padding: 2.5rem 1.5rem;
+    padding: 2.5rem 1.5rem 1.5rem;
     display: grid;
-    grid-template-columns: 1.8fr 1fr;
-    gap: 2rem;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 2.5rem;
 }
 
 .footer-col h4 {
     color: var(--gold);
     font-family: var(--font-heading);
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+    font-size: 1.05rem;
+    margin-bottom: 1.2rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid rgba(200,168,78,0.2);
+    letter-spacing: 0.02em;
 }
 
-.footer-info-text p {
-    font-size: 0.9rem;
+/* Footer About */
+.footer-tagline {
+    font-size: 0.85rem;
     color: var(--cream-dark);
-    line-height: 1.65;
-    margin-bottom: 0.35rem;
+    margin-bottom: 1.2rem;
+    font-style: italic;
 }
 
-.footer-info-text strong {
-    color: var(--gold-light);
+.footer-contact {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
-.footer-info-text a {
-    color: var(--gold-light);
+.footer-contact li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+    color: var(--cream-dark);
+    line-height: 1.5;
 }
-.footer-info-text a:hover { color: var(--gold); }
+
+.footer-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--gold);
+    opacity: 0.7;
+}
+
+.footer-contact a {
+    color: var(--gold-light);
+    transition: color 0.2s;
+}
+.footer-contact a:hover { color: var(--gold); }
+
+/* Footer People */
+.footer-person {
+    display: flex;
+    flex-direction: column;
+    padding: 0.7rem 0.8rem;
+    margin-bottom: 0.6rem;
+    background: rgba(255,255,255,0.03);
+    border-left: 2px solid rgba(200,168,78,0.3);
+    border-radius: 0 4px 4px 0;
+}
+
+.person-role {
+    font-size: 0.75rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.15rem;
+}
+
+.person-name {
+    font-size: 0.95rem;
+    color: var(--cream);
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.person-contact {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.person-contact a {
+    font-size: 0.82rem;
+    color: var(--cream-dark);
+    transition: color 0.2s;
+}
+.person-contact a:hover { color: var(--gold); }
 
 /* Footer Categories */
 .footer-categories {
@@ -1653,7 +1714,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-categories li {
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.3rem;
 }
 
 .footer-categories a {
@@ -1661,21 +1722,42 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: space-between;
     align-items: center;
     color: var(--cream-dark);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     padding: 0.35rem 0;
-    border-bottom: 1px solid rgba(200,168,78,0.08);
+    border-bottom: 1px solid rgba(200,168,78,0.06);
     transition: color 0.2s;
 }
 
 .footer-categories a:hover { color: var(--gold); }
 
 .cat-count {
-    background: rgba(200,168,78,0.15);
+    background: rgba(200,168,78,0.12);
     color: var(--gold);
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     padding: 0.1rem 0.5rem;
     border-radius: 10px;
     font-weight: 600;
+}
+
+/* Footer Bottom Bar */
+.footer-bottom {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(200,168,78,0.15);
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--cream-dark);
+}
+
+.footer-bottom strong {
+    color: var(--gold-light);
+}
+
+.footer-reuse {
+    margin-top: 0.3rem;
+    font-size: 0.78rem;
+    opacity: 0.6;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -2007,6 +2089,10 @@ h1, h2, h3, h4, h5, h6 {
     }
     .footer-inner {
         grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    .footer-about {
+        grid-column: 1 / -1;
     }
 
     /* Library decorations — scale down on tablet */
@@ -2132,7 +2218,8 @@ h1, h2, h3, h4, h5, h6 {
     .card { margin-bottom: 0.75rem; }
     .card-grid { gap: 0.75rem; }
 
-    .footer-inner { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+    .footer-about { grid-column: auto; }
 
     .entry-title { font-size: 1.5rem; }
 
