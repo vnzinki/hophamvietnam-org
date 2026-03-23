@@ -2028,28 +2028,82 @@ h1, h2, h3, h4, h5, h6 {
     .header-frame { inset: 5px; }
 
     /* Show mobile menu toggle */
-    .menu-toggle { display: flex; }
+    .menu-toggle { display: flex; order: 1; padding: 0.75rem 1rem; }
 
     .nav-inner {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 0 1rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 0;
+    }
+
+    .nav-search-toggle {
+        order: 2;
+        margin-left: auto;
     }
 
     .nav-menu {
         display: none;
         flex-direction: column;
+        order: 3;
+        width: 100%;
+        border-top: 1px solid rgba(200,168,78,0.15);
     }
     .nav-menu.is-open { display: flex; }
 
     .nav-menu li a {
-        padding: 0.75rem 1rem;
+        padding: 0.75rem 1.25rem;
         border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     .nav-menu .sub-menu {
         position: static;
         box-shadow: none;
+    }
+
+    /* Search inline in navbar on mobile */
+    .search-overlay {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        background: var(--brown-darkest);
+        z-index: auto;
+        width: 100%;
+        align-items: stretch;
+        justify-content: stretch;
+        border-top: 1px solid rgba(200,168,78,0.15);
+    }
+    .search-overlay-inner {
+        width: 100%;
+        max-width: none;
+        padding: 0.5rem 0.75rem;
+    }
+    .search-overlay .search-field {
+        -webkit-appearance: none;
+        appearance: none;
+        font-size: 0.9rem;
+        padding: 0.55rem 0.75rem;
+        background: rgba(255,255,255,0.08) !important;
+        border: 1px solid rgba(200,168,78,0.3) !important;
+        border-right: none !important;
+        color: var(--cream) !important;
+        border-radius: var(--radius) 0 0 var(--radius);
+        color-scheme: dark;
+    }
+    .search-overlay .search-field::placeholder {
+        color: rgba(232,213,181,0.5);
+    }
+    .search-overlay .search-submit {
+        padding: 0.55rem 0.9rem;
+        font-size: 0.85rem;
+        background: var(--gold-dark);
+        border: 1px solid var(--gold-dark);
+        color: var(--white);
+    }
+    .search-close {
+        display: none;
     }
 
     .slide-img,

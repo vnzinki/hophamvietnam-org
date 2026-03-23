@@ -90,9 +90,11 @@ function initSearchOverlay() {
     if (!toggle || !overlay) return;
 
     toggle.addEventListener('click', () => {
-        overlay.classList.add('is-open');
-        const input = overlay.querySelector('.search-field');
-        if (input) input.focus();
+        overlay.classList.toggle('is-open');
+        if (overlay.classList.contains('is-open')) {
+            const input = overlay.querySelector('.search-field');
+            if (input) input.focus();
+        }
     });
 
     if (close) {
