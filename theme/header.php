@@ -47,25 +47,26 @@
         <span class="divider-dot"></span>
     </div>
 
-    <!-- Main navigation -->
-    <nav class="main-nav">
-        <div class="nav-inner">
-            <button class="menu-toggle" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-            <?php
-            wp_nav_menu([
-                'theme_location' => 'primary',
-                'container'      => false,
-                'menu_class'     => 'nav-menu',
-                'fallback_cb'    => 'hopham_fallback_menu',
-            ]);
-            ?>
-            <button class="nav-search-toggle" aria-label="Tìm kiếm">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-            </button>
-        </div>
-    </nav>
+</header>
+
+<!-- Main navigation — separate from header, sticky on scroll -->
+<nav class="main-nav">
+    <div class="nav-inner">
+        <button class="menu-toggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <?php
+        wp_nav_menu([
+            'theme_location' => 'primary',
+            'container'      => false,
+            'menu_class'     => 'nav-menu',
+            'fallback_cb'    => 'hopham_fallback_menu',
+        ]);
+        ?>
+        <button class="nav-search-toggle" aria-label="Tìm kiếm">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        </button>
+    </div>
 
     <div class="search-overlay" id="searchOverlay">
         <div class="search-overlay-inner">
@@ -73,7 +74,7 @@
             <button class="search-close" aria-label="Đóng">&times;</button>
         </div>
     </div>
-</header>
+</nav>
 
 <main class="site-main">
 <?php
