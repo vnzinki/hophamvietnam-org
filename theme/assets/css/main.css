@@ -319,6 +319,16 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
+/* WP admin bar: push sticky nav below the 32px bar */
+.admin-bar .main-nav {
+    top: 32px;
+}
+@media screen and (max-width: 782px) {
+    .admin-bar .main-nav {
+        top: 46px;  /* WP admin bar is 46px on mobile */
+    }
+}
+
 .nav-inner {
     max-width: var(--container-max);
     margin: 0 auto;
@@ -427,6 +437,18 @@ h1, h2, h3, h4, h5, h6 {
     ) 1;
     box-shadow:
         inset 0 -6px 12px -4px rgba(60,26,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+.hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('../images/chieu-coi-pattern.svg') repeat;
+    background-size: 60px 60px;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .hero-grid {
@@ -434,6 +456,8 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 2fr 1fr;
     gap: var(--gap);
     align-items: start;
+    position: relative;
+    z-index: 1;
 }
 
 /* Slider */
@@ -1093,13 +1117,13 @@ h1, h2, h3, h4, h5, h6 {
     position: absolute;
     inset: 6px;
     pointer-events: none;
-    z-index: 2;
+    z-index: 0;
     background:
         url('../images/corner-ornament.svg') left top / 100px 100px no-repeat,
         url('../images/corner-ornament-tr.svg') right top / 100px 100px no-repeat,
         url('../images/corner-ornament-bl.svg') left bottom / 100px 100px no-repeat,
         url('../images/corner-ornament-br.svg') right bottom / 100px 100px no-repeat;
-    opacity: 0.7;
+    opacity: 0.4;
 }
 
 /* Chữ thọ watermark on article pages */
@@ -1167,16 +1191,133 @@ h1, h2, h3, h4, h5, h6 {
     overflow: hidden;
 }
 
+/* ── Post content typography ── */
 .entry-content {
-    font-size: 1.05rem;
-    line-height: 1.9;
+    font-size: 1.08rem;
+    line-height: 2;
     color: var(--text-primary);
+    max-width: 720px;
+    text-align: justify;
+    text-justify: inter-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
-.entry-content p { margin-bottom: 1.25rem; }
-.entry-content h2 { font-size: 1.6rem; margin: 2rem 0 1rem; font-weight: 600; }
-.entry-content h3 { font-size: 1.35rem; margin: 1.5rem 0 0.75rem; font-weight: 600; }
-.entry-content img { border-radius: var(--radius); margin: 1rem 0; }
+/* Paragraphs — generous spacing, subtle indent for Vietnamese reading flow */
+.entry-content p {
+    margin-bottom: 1.6rem;
+    text-indent: 1.5em;
+}
+
+/* First paragraph after entry header or thumbnail — decorative drop cap */
+.entry-content > p:first-of-type {
+    text-indent: 0;
+}
+.entry-content > p:first-of-type::first-letter {
+    font-family: var(--font-heading);
+    font-size: 3.4em;
+    float: left;
+    line-height: 0.8;
+    margin: 0.05em 0.12em 0 0;
+    color: var(--brown-deep);
+    font-weight: 700;
+}
+
+/* Paragraphs right after images/videos — no indent (visual break already present) */
+.entry-content .wp-block-image + p,
+.entry-content figure + p,
+.entry-content iframe + p,
+.entry-content .wp-block-embed + p,
+.entry-content img + p {
+    text-indent: 0;
+}
+
+/* Headings inside content */
+.entry-content h2 {
+    font-size: 1.6rem;
+    margin: 2.5rem 0 1.2rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    color: var(--brown-deep);
+    border-bottom: 1px solid rgba(166,138,62,0.2);
+    padding-bottom: 0.4rem;
+}
+.entry-content h3 {
+    font-size: 1.35rem;
+    margin: 2rem 0 0.8rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    color: var(--brown-dark);
+}
+
+/* Images — center with breathing room, subtle shadow */
+.entry-content img {
+    border-radius: var(--radius);
+    margin: 1.8rem auto;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 2px 12px rgba(26,10,0,0.1);
+}
+
+/* WordPress image captions */
+.entry-content .wp-caption,
+.entry-content figure.wp-block-image {
+    margin: 1.8rem auto;
+    text-align: center;
+}
+.entry-content .wp-caption-text,
+.entry-content figcaption {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    font-style: italic;
+    font-family: var(--font-accent);
+    margin-top: 0.5rem;
+    padding: 0 1rem;
+}
+
+/* Raw URLs — wrap and style subtly */
+.entry-content a {
+    color: var(--brown-dark);
+    text-decoration: underline;
+    text-decoration-color: rgba(166,138,62,0.4);
+    text-underline-offset: 2px;
+    transition: color 0.2s, text-decoration-color 0.2s;
+    word-break: break-all;
+}
+.entry-content a:hover {
+    color: var(--gold);
+    text-decoration-color: var(--gold);
+}
+
+/* Embedded videos (iframes) */
+.entry-content iframe {
+    display: block;
+    margin: 1.8rem auto;
+    max-width: 100%;
+    border-radius: var(--radius);
+    box-shadow: 0 2px 12px rgba(26,10,0,0.1);
+}
+
+/* Lists inside content */
+.entry-content ul,
+.entry-content ol {
+    margin: 1.2rem 0 1.6rem 1.5em;
+    padding-left: 0.5em;
+}
+.entry-content li {
+    margin-bottom: 0.5rem;
+    text-indent: 0;
+}
+
+/* Horizontal rules as decorative separators */
+.entry-content hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(166,138,62,0.3), transparent);
+    margin: 2.5rem auto;
+    max-width: 200px;
+}
 
 .entry-content blockquote {
     border-left: 4px solid var(--gold);
@@ -2306,6 +2447,23 @@ h1, h2, h3, h4, h5, h6 {
         gap: 0.5rem;
         padding: 0.75rem;
     }
+    /* Entry content responsive — tablet */
+    .entry-content {
+        max-width: 100%;
+        text-align: left;
+        line-height: 1.9;
+    }
+    .entry-content p {
+        text-indent: 1em;
+        margin-bottom: 1.4rem;
+    }
+    .entry-content > p:first-of-type::first-letter {
+        font-size: 2.8em;
+        margin-right: 0.06em;
+    }
+    .entry-content img {
+        border-radius: 4px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -2338,4 +2496,26 @@ h1, h2, h3, h4, h5, h6 {
     .slide-placeholder { height: 200px; }
     .hero-news { flex-direction: column; }
     .news-item { min-width: 0; }
+    /* Entry content responsive — small phone */
+    .entry-content {
+        font-size: 0.95rem;
+        line-height: 1.85;
+    }
+    .entry-content p {
+        text-indent: 0.8em;
+        margin-bottom: 1.2rem;
+    }
+    .entry-content > p:first-of-type::first-letter {
+        font-size: 2.4em;
+    }
+    .entry-content blockquote {
+        padding: 1rem 0.8rem 1rem 1.2rem;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .entry-content blockquote::before {
+        font-size: 2rem;
+        left: 0.4rem;
+        top: 0.3rem;
+    }
 }

@@ -27,7 +27,7 @@ docker compose exec wordpress wp --allow-root plugin install advanced-media-offl
 
 # 6. Activate theme & set local admin password
 docker compose exec wordpress wp --allow-root theme activate hopham-vietnam
-docker compose exec wordpress wp --allow-root user update trungpq --user_pass=admin123 --skip-email
+docker compose exec wordpress wp --allow-root user update admin --user_pass=admin123 --skip-email
 ```
 
 > **Media images** are served from the production cloud storage via the **Advanced Media Offloader** plugin.
@@ -46,7 +46,7 @@ docker compose exec wordpress wp --allow-root user update trungpq --user_pass=ad
 
 | Field    | Value      |
 |----------|------------|
-| Username | `trungpq`  |
+| Username | `admin`    |
 | Password | `admin123` |
 
 > These are local-only credentials. Production passwords are unchanged.
