@@ -699,7 +699,10 @@ h1, h2, h3, h4, h5, h6 {
 .section-category > .container::before {
     content: '';
     position: absolute;
-    inset: 0 -20px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     border: 1px solid rgba(166,138,62,0.1);
     border-radius: 2px;
     pointer-events: none;
@@ -1821,6 +1824,13 @@ h1, h2, h3, h4, h5, h6 {
     .card-grid { grid-template-columns: 1fr; }
     .cat-featured { grid-template-columns: 1fr; }
 
+    /* Reduce grid gap on mobile — less empty space between stacked columns */
+    .two-col { gap: 0.5rem; }
+
+    /* Reduce card bottom margin on mobile */
+    .card { margin-bottom: 0.75rem; }
+    .card-grid { gap: 0.75rem; }
+
     .footer-inner { grid-template-columns: 1fr; }
 
     .entry-title { font-size: 1.5rem; }
@@ -1856,7 +1866,7 @@ h1, h2, h3, h4, h5, h6 {
     .section-nguoi > .container::before,
     .section-hoatdong > .container::before,
     .section-category > .container::before {
-        inset: 0 -10px;
+        display: none;
     }
 }
 
