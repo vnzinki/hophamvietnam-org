@@ -408,9 +408,17 @@ h1, h2, h3, h4, h5, h6 {
    HERO SECTION
    ═══════════════════════════════════════════════════════════ */
 .hero-section {
-    background: var(--cream-dark);
+    background:
+        radial-gradient(ellipse at 30% 50%, rgba(160,120,60,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at center, transparent 60%, rgba(92,46,0,0.04) 100%),
+        linear-gradient(175deg, #EBD8B5 0%, #E2CCA5 50%, #D9C098 100%);
     padding: 2rem 0;
-    border-bottom: 3px solid var(--gold-dark);
+    border-bottom: 5px solid transparent;
+    border-image: linear-gradient(
+        90deg, #3C1A00, #5C2E00 15%, #9B6B3D 50%, #5C2E00 85%, #3C1A00
+    ) 1;
+    box-shadow:
+        inset 0 -6px 12px -4px rgba(60,26,0,0.1);
 }
 
 .hero-grid {
@@ -540,39 +548,179 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SECTION LAYOUTS
+   ANCIENT LIBRARY — Page Block Decorations
+   ═══════════════════════════════════════════════════════════
+   Decorative elements (all sourced from internet, not AI-generated):
+   • endless-knot-gold.svg — nút bất tận corner ornament (Wikimedia, PD)
+   • five-blessings.svg — ngũ phúc/five bats symbol (Wikimedia, CC0)
+   • Wave pattern (sóng nước) — CSS radial-gradient scallop
+   • Longevity character (chữ thọ 壽) — Unicode + CSS styling
    ═══════════════════════════════════════════════════════════ */
+
+/* ─── Shared Ancient Library Section Base ──────────────────── */
 .section-nguoi,
 .section-hoatdong,
 .section-category {
+    position: relative;
     padding: var(--section-pad);
+    /* Old paper / aged parchment texture */
+    background:
+        /* Paper fiber lines */
+        repeating-linear-gradient(
+            0deg,
+            transparent, transparent 3px,
+            rgba(139,115,85,0.018) 3px, rgba(139,115,85,0.018) 4px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent, transparent 5px,
+            rgba(139,115,85,0.012) 5px, rgba(139,115,85,0.012) 6px
+        ),
+        /* Foxing / age spots */
+        radial-gradient(ellipse at 15% 20%, rgba(160,120,60,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 70%, rgba(140,100,50,0.035) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 90%, rgba(150,110,55,0.03) 0%, transparent 45%),
+        /* Vignette darkening at edges */
+        radial-gradient(ellipse at center, transparent 55%, rgba(92,46,0,0.04) 100%),
+        /* Warm parchment base */
+        linear-gradient(175deg, #FDF6E3 0%, #F5ECD4 35%, #F0E2C8 70%, #EBD8B8 100%);
+    /* Wood frame top & bottom borders */
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-image: linear-gradient(
+        90deg,
+        #3C1A00 0%, #5C2E00 8%, #7A4420 20%,
+        #9B6B3D 35%, #A68A3E 50%,
+        #9B6B3D 65%, #7A4420 80%, #5C2E00 92%, #3C1A00 100%
+    ) 1;
+    /* Carved depth shadows */
+    box-shadow:
+        inset 0 6px 12px -4px rgba(60,26,0,0.12),
+        inset 0 -6px 12px -4px rgba(60,26,0,0.12),
+        inset 5px 0 10px -4px rgba(60,26,0,0.06),
+        inset -5px 0 10px -4px rgba(60,26,0,0.06),
+        0 1px 0 rgba(200,168,78,0.15),
+        0 -1px 0 rgba(200,168,78,0.15);
 }
 
-.section-nguoi {
+/* ─── Nút Bất Tận — Endless Knot Corner Ornaments ─────────── */
+.section-nguoi::before,
+.section-hoatdong::before,
+.section-category::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
     background:
-        radial-gradient(ellipse at top right, rgba(200,168,78,0.04), transparent 60%),
-        var(--parchment);
+        url('../images/endless-knot-gold.svg') 16px 16px / 44px 34px no-repeat,
+        url('../images/endless-knot-gold.svg') calc(100% - 16px) 16px / 44px 34px no-repeat,
+        url('../images/endless-knot-gold.svg') 16px calc(100% - 16px) / 44px 34px no-repeat,
+        url('../images/endless-knot-gold.svg') calc(100% - 16px) calc(100% - 16px) / 44px 34px no-repeat;
+    opacity: 0.2;
+}
+
+/* ─── Sóng Nước — Wave Pattern Section Separators ─────────── */
+.section-hoatdong,
+.section-category {
+    margin-top: 0;
+}
+
+.section-hoatdong::after,
+.section-category.section-vantotamtong::after,
+.section-category.section-thuvien::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 5%;
+    right: 5%;
+    height: 12px;
+    z-index: 3;
+    /* Scallop wave pattern (sóng nước) */
+    background:
+        radial-gradient(circle at 50% 0%, var(--parchment) 6px, transparent 6.5px) repeat-x,
+        radial-gradient(circle at 50% 100%, transparent 6px, rgba(166,138,62,0.25) 6.5px, rgba(166,138,62,0.25) 7px, transparent 7.5px) repeat-x;
+    background-size: 16px 12px;
+    background-position: 0 0;
+}
+
+/* ─── Chữ Thọ 壽 — Longevity Watermark ───────────────────── */
+.section-nguoi .container::after,
+.section-category.section-vantotamtong .container::after {
+    content: '壽';
+    position: absolute;
+    bottom: 10%;
+    right: 3%;
+    font-size: 12rem;
+    font-family: 'Noto Serif', 'SimSun', 'PMingLiU', serif;
+    font-weight: 900;
+    color: rgba(166,138,62,0.04);
+    line-height: 1;
+    pointer-events: none;
+    z-index: 0;
+    text-shadow: 0 0 40px rgba(166,138,62,0.02);
+}
+
+.section-nguoi .container,
+.section-category.section-vantotamtong .container {
+    position: relative;
+}
+
+/* ─── Ngũ Phúc — Five Blessings Watermark ─────────────────── */
+.section-hoatdong .container::after,
+.section-category.section-thuvien .container::after {
+    content: '';
+    position: absolute;
+    bottom: 5%;
+    right: 2%;
+    width: 180px;
+    height: 180px;
+    background: url('../images/five-blessings.svg') center / contain no-repeat;
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.section-hoatdong .container,
+.section-category.section-thuvien .container {
+    position: relative;
+}
+
+/* ─── Wood Frame Inner Trim Lines ─────────────────────────── */
+.section-nguoi > .container,
+.section-hoatdong > .container,
+.section-category > .container {
+    position: relative;
+    padding: 1.2rem 0;
+}
+
+.section-nguoi > .container::before,
+.section-hoatdong > .container::before,
+.section-category > .container::before {
+    content: '';
+    position: absolute;
+    inset: 0 -20px;
+    border: 1px solid rgba(166,138,62,0.1);
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ─── Individual Section Accent Variations ─────────────────── */
+.section-nguoi {
+    background-color: #FDF6E3;
 }
 
 .section-hoatdong {
-    background:
-        radial-gradient(ellipse at bottom left, rgba(200,168,78,0.04), transparent 60%),
-        var(--cream-light);
-    border-top: 1px solid rgba(200,168,78,0.15);
+    background-color: #F8F0DC;
 }
 
 .section-vantotamtong {
-    background:
-        radial-gradient(ellipse at top center, rgba(200,168,78,0.05), transparent 60%),
-        var(--parchment);
-    border-top: 1px solid rgba(200,168,78,0.15);
+    background-color: #FDF6E3;
 }
 
 .section-thuvien {
-    background:
-        radial-gradient(ellipse at bottom right, rgba(200,168,78,0.04), transparent 60%),
-        var(--cream-light);
-    border-top: 1px solid rgba(200,168,78,0.15);
+    background-color: #F8F0DC;
 }
 
 .two-col {
@@ -590,28 +738,52 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.6rem;
     color: var(--brown-deep);
     font-family: var(--font-heading);
+    letter-spacing: 0.03em;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
 }
 
 .title-deco {
     color: var(--gold);
     margin-right: 0.3rem;
+    text-shadow: 0 0 8px rgba(200,168,78,0.3);
 }
 
 /* ═══════════════════════════════════════════════════════════
-   CARDS
+   CARDS — Aged Parchment Notes
    ═══════════════════════════════════════════════════════════ */
 .card {
-    background: var(--white);
+    background:
+        /* Subtle paper grain */
+        repeating-linear-gradient(
+            0deg,
+            transparent, transparent 4px,
+            rgba(139,115,85,0.012) 4px, rgba(139,115,85,0.012) 5px
+        ),
+        /* Warm aged paper */
+        linear-gradient(to bottom, #FEFCF7 0%, #F8F0DC 100%);
     border-radius: var(--radius);
-    border: 1px solid rgba(200,168,78,0.12);
+    border: 1px solid rgba(139,115,85,0.18);
     overflow: hidden;
     transition: all 0.3s;
     margin-bottom: 1.5rem;
+    box-shadow:
+        1px 2px 6px rgba(60,26,0,0.06),
+        inset 0 0 30px rgba(139,115,85,0.03);
 }
 
 .card:hover {
-    box-shadow: 0 4px 20px rgba(44,24,16,0.08);
-    border-color: rgba(200,168,78,0.3);
+    box-shadow:
+        2px 4px 20px rgba(60,26,0,0.1),
+        inset 0 0 30px rgba(139,115,85,0.05);
+    border-color: rgba(166,138,62,0.35);
+}
+
+/* Featured card — more prominent parchment treatment */
+.card-featured {
+    border: 1px solid rgba(166,138,62,0.25);
+    box-shadow:
+        2px 3px 10px rgba(60,26,0,0.08),
+        inset 0 0 40px rgba(139,115,85,0.04);
 }
 
 .card-horizontal {
@@ -690,14 +862,24 @@ h1, h2, h3, h4, h5, h6 {
 .card-vertical .card-excerpt { -webkit-line-clamp: 2; }
 
 /* ═══════════════════════════════════════════════════════════
-   WIDGET BOXES (Sidebar)
+   WIDGET BOXES — Wooden Library Shelf Boxes
    ═══════════════════════════════════════════════════════════ */
 .widget-box {
-    background: var(--white);
+    background:
+        /* Paper grain */
+        repeating-linear-gradient(
+            0deg,
+            transparent, transparent 4px,
+            rgba(139,115,85,0.01) 4px, rgba(139,115,85,0.01) 5px
+        ),
+        linear-gradient(to bottom, #FEFCF7, #F5ECD4);
     border-radius: var(--radius);
-    border: 1px solid rgba(200,168,78,0.15);
+    border: 1px solid rgba(139,115,85,0.2);
     overflow: hidden;
     margin-bottom: 1.5rem;
+    box-shadow:
+        2px 3px 8px rgba(60,26,0,0.07),
+        inset 0 0 20px rgba(139,115,85,0.025);
 }
 
 .widget-header {
@@ -825,11 +1007,47 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SINGLE POST
+   SINGLE POST & PAGES — Library Reading Room
    ═══════════════════════════════════════════════════════════ */
 .single-post,
 .page-content {
     padding: 2rem 0;
+    position: relative;
+    /* Aged parchment */
+    background:
+        repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(139,115,85,0.015) 3px, rgba(139,115,85,0.015) 4px),
+        radial-gradient(ellipse at 20% 30%, rgba(160,120,60,0.03) 0%, transparent 50%),
+        radial-gradient(ellipse at center, transparent 60%, rgba(92,46,0,0.03) 100%),
+        linear-gradient(175deg, #FDF6E3 0%, #F5ECD4 50%, #F0E2C8 100%);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-image: linear-gradient(
+        90deg, #3C1A00, #5C2E00 15%, #9B6B3D 50%, #5C2E00 85%, #3C1A00
+    ) 1;
+    box-shadow:
+        inset 0 5px 10px -3px rgba(60,26,0,0.1),
+        inset 0 -5px 10px -3px rgba(60,26,0,0.1);
+}
+
+/* Chữ thọ watermark on article pages */
+.single-post .col-main::after,
+.page-content .col-main::after {
+    content: '壽';
+    position: absolute;
+    bottom: 15%;
+    right: 0;
+    font-size: 10rem;
+    font-family: 'Noto Serif', 'SimSun', serif;
+    font-weight: 900;
+    color: rgba(166,138,62,0.03);
+    line-height: 1;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.single-post .col-main,
+.page-content .col-main {
+    position: relative;
 }
 
 .single-layout {
@@ -841,8 +1059,21 @@ h1, h2, h3, h4, h5, h6 {
 
 .entry-header {
     margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid var(--gold);
+    padding-bottom: 1.2rem;
+    border-bottom: none;
+    position: relative;
+}
+
+.entry-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background:
+        radial-gradient(circle at 50% 0, transparent 5px, rgba(166,138,62,0.3) 5.5px, rgba(166,138,62,0.3) 6px, transparent 6.5px) repeat-x;
+    background-size: 14px 10px;
 }
 
 .entry-title {
@@ -877,11 +1108,25 @@ h1, h2, h3, h4, h5, h6 {
 
 .entry-content blockquote {
     border-left: 4px solid var(--gold);
-    padding: 1rem 1.5rem;
+    padding: 1.2rem 1.5rem;
     margin: 1.5rem 0;
-    background: rgba(200,168,78,0.05);
+    background:
+        repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(139,115,85,0.01) 4px, rgba(139,115,85,0.01) 5px),
+        linear-gradient(to right, rgba(200,168,78,0.06), rgba(200,168,78,0.02));
     font-style: italic;
     font-family: var(--font-accent);
+    position: relative;
+}
+
+.entry-content blockquote::before {
+    content: '❝';
+    position: absolute;
+    top: -0.3rem;
+    left: 0.5rem;
+    font-size: 2.5rem;
+    color: rgba(166,138,62,0.15);
+    font-style: normal;
+    line-height: 1;
 }
 
 .entry-footer {
@@ -937,7 +1182,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   ARCHIVE / SEARCH
+   ARCHIVE / SEARCH — Library Archive Room
    ═══════════════════════════════════════════════════════════ */
 .archive-layout {
     display: grid;
@@ -948,10 +1193,41 @@ h1, h2, h3, h4, h5, h6 {
     align-items: start;
 }
 
+/* Archive page wrapper parchment treatment */
+.archive .site-main,
+.search .site-main {
+    position: relative;
+    background:
+        repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(139,115,85,0.015) 3px, rgba(139,115,85,0.015) 4px),
+        radial-gradient(ellipse at center, transparent 60%, rgba(92,46,0,0.03) 100%),
+        linear-gradient(175deg, #FDF6E3, #F5ECD4 50%, #EBD8B8);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-image: linear-gradient(
+        90deg, #3C1A00, #5C2E00 15%, #9B6B3D 50%, #5C2E00 85%, #3C1A00
+    ) 1;
+    box-shadow:
+        inset 0 5px 10px -3px rgba(60,26,0,0.1),
+        inset 0 -5px 10px -3px rgba(60,26,0,0.1);
+}
+
 .page-header {
     margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--gold);
+    padding-bottom: 1rem;
+    border-bottom: none;
+    position: relative;
+}
+
+.page-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background:
+        radial-gradient(circle at 50% 0, transparent 5px, rgba(166,138,62,0.3) 5.5px, rgba(166,138,62,0.3) 6px, transparent 6.5px) repeat-x;
+    background-size: 14px 10px;
 }
 
 .page-title {
@@ -1168,14 +1444,44 @@ h1, h2, h3, h4, h5, h6 {
 /* ═══════════════════════════════════════════════════════════
    SECTION HEADER WITH "MORE" LINK
    ═══════════════════════════════════════════════════════════ */
+/* ─── Ornate Section Headers (sóng nước wave border) ──────── */
 .section-header {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--gold);
+    padding-bottom: 1rem;
+    border-bottom: none;
     position: relative;
+}
+
+.section-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    /* Gold scallop wave (sóng nước) */
+    background:
+        radial-gradient(circle at 50% 0, transparent 5px, rgba(166,138,62,0.35) 5.5px, rgba(166,138,62,0.35) 6px, transparent 6.5px) repeat-x;
+    background-size: 14px 10px;
+}
+
+.section-title {
+    position: relative;
+    z-index: 1;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+    border-radius: 2px;
 }
 
 .section-more {
@@ -1269,10 +1575,13 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     flex-direction: column;
     gap: 0;
-    background: var(--white);
+    background:
+        repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(139,115,85,0.01) 4px, rgba(139,115,85,0.01) 5px),
+        linear-gradient(to bottom, #FEFCF7, #F5ECD4);
     border-radius: var(--radius);
-    border: 1px solid rgba(200,168,78,0.12);
+    border: 1px solid rgba(139,115,85,0.18);
     padding: 0 1rem;
+    box-shadow: 1px 2px 6px rgba(60,26,0,0.05);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1442,6 +1751,22 @@ h1, h2, h3, h4, h5, h6 {
     .footer-inner {
         grid-template-columns: 1fr 1fr;
     }
+
+    /* Library decorations — scale down on tablet */
+    .section-nguoi::before,
+    .section-hoatdong::before,
+    .section-category::before {
+        background-size: 36px 28px;
+    }
+    .section-nguoi .container::after,
+    .section-category.section-vantotamtong .container::after {
+        font-size: 9rem;
+    }
+    .section-hoatdong .container::after,
+    .section-category.section-thuvien .container::after {
+        width: 140px;
+        height: 140px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1501,6 +1826,38 @@ h1, h2, h3, h4, h5, h6 {
     .entry-title { font-size: 1.5rem; }
 
     .error-content h1 { font-size: 4rem; }
+
+    /* Library decorations — simplify on mobile */
+    .section-nguoi::before,
+    .section-hoatdong::before,
+    .section-category::before {
+        background-size: 28px 22px;
+        background-position:
+            8px 8px,
+            calc(100% - 8px) 8px,
+            8px calc(100% - 8px),
+            calc(100% - 8px) calc(100% - 8px);
+        opacity: 0.15;
+    }
+    .section-nguoi .container::after,
+    .section-category.section-vantotamtong .container::after {
+        font-size: 6rem;
+        right: 1%;
+    }
+    .section-hoatdong .container::after,
+    .section-category.section-thuvien .container::after {
+        width: 100px;
+        height: 100px;
+    }
+    .single-post .col-main::after,
+    .page-content .col-main::after {
+        font-size: 6rem;
+    }
+    .section-nguoi > .container::before,
+    .section-hoatdong > .container::before,
+    .section-category > .container::before {
+        inset: 0 -10px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1514,6 +1871,21 @@ h1, h2, h3, h4, h5, h6 {
     .frame-corner::before { width: 16px; }
     .frame-corner::after { height: 16px; }
     .section-title { font-size: 1.3rem; }
+    /* Hide corner ornaments on very small screens */
+    .section-nguoi::before,
+    .section-hoatdong::before,
+    .section-category::before {
+        display: none;
+    }
+    .section-nguoi .container::after,
+    .section-category.section-vantotamtong .container::after {
+        font-size: 4rem;
+    }
+    .section-hoatdong .container::after,
+    .section-category.section-thuvien .container::after {
+        width: 70px;
+        height: 70px;
+    }
     .slide-img,
     .slide-placeholder { height: 200px; }
     .hero-news { flex-direction: column; }
