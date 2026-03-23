@@ -1754,6 +1754,50 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   BROKEN IMAGE PLACEHOLDER
+   ═══════════════════════════════════════════════════════════ */
+.img-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background:
+        repeating-linear-gradient(
+            45deg,
+            transparent, transparent 8px,
+            rgba(139,115,85,0.03) 8px, rgba(139,115,85,0.03) 9px
+        ),
+        linear-gradient(175deg, #F8F0DC 0%, #F0E2C8 100%);
+    border: 1px dashed rgba(166,138,62,0.35);
+    border-radius: var(--radius);
+    max-width: 100%;
+    min-height: 100px;
+    max-height: 350px;
+    padding: 1.5rem 1rem;
+    margin: 1rem auto;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.img-placeholder-logo {
+    width: 40px !important;
+    height: 40px !important;
+    opacity: 0.35;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.img-placeholder-text {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--brown-mid);
+    opacity: 0.6;
+    font-style: italic;
+    text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════════
    FOOTER
    ═══════════════════════════════════════════════════════════ */
 .site-footer {

@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSlider();
     initMobileMenu();
     initSearchOverlay();
+    initBrokenImageHandler();
 });
 
 /* ─── Hero Slider ─────────────────────────────────────────── */
@@ -108,4 +109,43 @@ function initSearchOverlay() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') overlay.classList.remove('is-open');
     });
+}
+
+/* ─── Broken Image Placeholder ────────────────────────────── */
+function initBrokenImageHandler() {
+    const themeUri = document.querySelector('link[href*="hopham-vietnam"]')?.href?.replace(/\/assets\/.*/, '') || '';
+    const logoUrl  = themeUri + '/assets/images/logo.png';
+
+    function handleBrokenImage(img) {
+        if (img.dataset.brokenHandled) return;
+        img.dataset.brokenHandled = 'true';
+
+        var w = img.width  || img.getAttribute('width')  || 300;
+        var h = img.height || img.getAttribute('height') || 200;
+        // Cap height to keep placeholder reasonable
+        if (h > 400) h = Math.min(h, Math.max(w * 0.6, 250));
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'img-placeholder';
+        wrapper.style.width     = w + 'px';
+        wrapper.style.maxHeight = h + 'px';
+
+        wrapper.innerHTML =
+            '<img class="img-placeholder-logo" src="' + logoUrl + '" alt="Logo">' +
+            '<span class="img-placeholder-text">Không tải được hình ảnh</span>';
+
+        img.parentNode.replaceChild(wrapper, img);
+    }
+
+    // Handle already-broken images
+    document.querySelectorAll('img').forEach(img => {
+        if (img.complete && img.naturalWidth === 0 && img.src) {
+            handleBrokenImage(img);
+        }
+    });
+
+    // Handle future load errors
+    document.addEventListener('error', (e) => {
+        if (e.target.tagName === 'IMG') handleBrokenImage(e.target);
+    }, true);
 }
