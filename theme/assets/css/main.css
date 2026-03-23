@@ -1081,25 +1081,25 @@ h1, h2, h3, h4, h5, h6 {
         0 -1px 0 rgba(200,168,78,0.15);
 }
 
-/* Endless knot corner ornaments on single/page */
-.single-post::before,
-.page-content::before {
+/* Corner ornaments on content pane */
+.single-post .col-main::before,
+.page .col-main::before {
     content: '';
     position: absolute;
-    inset: 0;
+    inset: 6px;
     pointer-events: none;
     z-index: 2;
     background:
-        url('../images/endless-knot-gold.svg') 16px 16px / 44px 34px no-repeat,
-        url('../images/endless-knot-gold.svg') calc(100% - 16px) 16px / 44px 34px no-repeat,
-        url('../images/endless-knot-gold.svg') 16px calc(100% - 16px) / 44px 34px no-repeat,
-        url('../images/endless-knot-gold.svg') calc(100% - 16px) calc(100% - 16px) / 44px 34px no-repeat;
-    opacity: 0.2;
+        url('../images/corner-ornament.svg') left top / 100px 100px no-repeat,
+        url('../images/corner-ornament-tr.svg') right top / 100px 100px no-repeat,
+        url('../images/corner-ornament-bl.svg') left bottom / 100px 100px no-repeat,
+        url('../images/corner-ornament-br.svg') right bottom / 100px 100px no-repeat;
+    opacity: 0.7;
 }
 
 /* Chữ thọ watermark on article pages */
 .single-post .col-main::after,
-.page-content .col-main::after {
+.page .col-main::after {
     content: '壽';
     position: absolute;
     bottom: 15%;
@@ -1114,12 +1114,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .single-post .col-main,
-.page-content .col-main {
+.page .col-main {
     position: relative;
     background: var(--white);
     padding: 2rem 2.5rem;
     border-radius: var(--radius);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border: 2px solid var(--gold);
+    outline: 1px solid rgba(200,168,78,0.3);
+    outline-offset: 4px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    overflow: visible;
 }
 
 .single-layout {
