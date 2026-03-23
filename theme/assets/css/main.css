@@ -643,10 +643,13 @@ h1, h2, h3, h4, h5, h6 {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    z-index: 0;
+    z-index: 2;
     background:
-        url('../images/endless-knot-gold.svg') calc(100% - 10px) calc(100% - 10px) / 24px 18px no-repeat;
-    opacity: 0.08;
+        url('../images/endless-knot-gold.svg') 16px 16px / 44px 34px no-repeat,
+        url('../images/endless-knot-gold.svg') calc(100% - 16px) 16px / 44px 34px no-repeat,
+        url('../images/endless-knot-gold.svg') 16px calc(100% - 16px) / 44px 34px no-repeat,
+        url('../images/endless-knot-gold.svg') calc(100% - 16px) calc(100% - 16px) / 44px 34px no-repeat;
+    opacity: 0.2;
 }
 
 /* ─── Sóng Nước — Wave Pattern Section Separators ─────────── */
@@ -2265,7 +2268,7 @@ h1, h2, h3, h4, h5, h6 {
     .section-nguoi::before,
     .section-hoatdong::before,
     .section-category::before {
-        background-size: 20px 16px;
+        background-size: 36px 28px;
     }
     .section-nguoi .container::after,
     .section-category.section-vantotamtong .container::after {
@@ -2395,8 +2398,13 @@ h1, h2, h3, h4, h5, h6 {
     .section-nguoi::before,
     .section-hoatdong::before,
     .section-category::before {
-        background-size: 18px 14px;
-        opacity: 0.06;
+        background-size: 28px 22px;
+        background-position:
+            8px 8px,
+            calc(100% - 8px) 8px,
+            8px calc(100% - 8px),
+            calc(100% - 8px) calc(100% - 8px);
+        opacity: 0.15;
     }
     .section-nguoi .container::after,
     .section-category.section-vantotamtong .container::after {
