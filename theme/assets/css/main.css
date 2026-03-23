@@ -1128,8 +1128,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .entry-header {
     margin-bottom: 1.5rem;
-    padding-bottom: 1.2rem;
+    padding: 1rem 0 1.2rem;
     border-bottom: 1px solid rgba(166,138,62,0.3);
+    text-align: center;
 }
 
 .entry-title {
