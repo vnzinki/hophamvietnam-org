@@ -1116,6 +1116,10 @@ h1, h2, h3, h4, h5, h6 {
 .single-post .col-main,
 .page-content .col-main {
     position: relative;
+    background: var(--white);
+    padding: 2rem 2.5rem;
+    border-radius: var(--radius);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 
 .single-layout {
