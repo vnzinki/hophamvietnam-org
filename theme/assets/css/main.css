@@ -31,10 +31,10 @@
     --link-color:     #7A3B10;
     --link-hover:     #A85820;
 
-    /* Fonts — tuned for Vietnamese readability */
-    --font-heading:   'Playfair Display', 'Noto Serif', Georgia, serif;
-    --font-body:      'Noto Sans', 'Segoe UI', Tahoma, sans-serif;
-    --font-accent:    'Noto Serif', Georgia, serif;
+    /* Fonts — tuned for Vietnamese readability & cultural feel */
+    --font-heading:   'Cormorant Garamond', 'Noto Serif', Georgia, serif;
+    --font-body:      'Be Vietnam Pro', 'Segoe UI', Tahoma, sans-serif;
+    --font-accent:    'Spectral', 'Noto Serif', Georgia, serif;
 
     /* Spacing */
     --gap:            1.5rem;
@@ -52,10 +52,12 @@ body {
     font-family: var(--font-body);
     color: var(--text-primary);
     background: var(--parchment);
-    line-height: 1.75;
+    line-height: 1.8;
     font-size: 15px;
     letter-spacing: 0.01em;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'kern' 1, 'liga' 1;
 }
 
 a {
@@ -70,8 +72,9 @@ img { max-width: 100%; height: auto; display: block; }
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     color: var(--brown-dark);
-    line-height: 1.35;
-    font-weight: 700;
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: 0.01em;
 }
 
 .container {
@@ -246,9 +249,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .logo-text {
     font-family: var(--font-heading);
-    font-size: 2.2rem;
-    font-weight: 900;
-    letter-spacing: 0.14em;
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     color: var(--gold);
     text-shadow:
         0 0 12px rgba(200,168,78,0.3),
@@ -256,7 +259,7 @@ h1, h2, h3, h4, h5, h6 {
         0 2px 4px rgba(0,0,0,0.8),
         1px 1px 0 rgba(160,120,40,0.25);
     text-transform: uppercase;
-    line-height: 1.2;
+    line-height: 1.15;
 }
 
 /* ─── Gold Ornamental Divider ────────────────────────────── */
@@ -338,9 +341,9 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0.9rem 1.6rem;
     color: var(--cream);
     font-family: var(--font-body);
-    font-size: 0.95rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     transition: all 0.3s;
     position: relative;
@@ -472,11 +475,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .slide-caption h2 {
     color: var(--white);
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.6rem;
+    font-weight: 600;
     font-family: var(--font-heading);
     text-shadow: 0 1px 3px rgba(0,0,0,0.8), 0 3px 8px rgba(0,0,0,0.6);
-    line-height: 1.45;
+    line-height: 1.4;
     letter-spacing: 0.01em;
 }
 
@@ -535,12 +538,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .news-info h4 {
-    font-size: 0.92rem;
-    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-family: var(--font-heading);
     font-weight: 600;
     color: var(--brown-dark);
     margin-bottom: 0.3rem;
-    line-height: 1.45;
+    line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -641,7 +644,7 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 10%;
     right: 3%;
     font-size: 12rem;
-    font-family: 'Noto Serif', 'SimSun', 'PMingLiU', serif;
+    font-family: 'Spectral', 'SimSun', 'PMingLiU', serif;
     font-weight: 900;
     color: rgba(166,138,62,0.04);
     line-height: 1;
@@ -712,10 +715,11 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ─── Section Headers ─────────────────────────────────────── */
 .section-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color: var(--brown-deep);
     font-family: var(--font-heading);
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
+    font-weight: 600;
     text-shadow: 0 1px 0 rgba(255,255,255,0.5);
 }
 
@@ -788,8 +792,8 @@ h1, h2, h3, h4, h5, h6 {
 .card-title {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
-    font-family: var(--font-body);
-    font-weight: 700;
+    font-family: var(--font-heading);
+    font-weight: 600;
 }
 
 .card-title a {
@@ -881,8 +885,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .widget-header h3 {
     color: var(--gold);
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     font-family: var(--font-heading);
+    font-weight: 600;
     margin: 0;
 }
 
@@ -918,11 +923,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mini-info h4 {
-    font-size: 0.88rem;
+    font-size: 0.92rem;
     color: var(--brown-dark);
-    font-family: var(--font-body);
+    font-family: var(--font-heading);
     font-weight: 600;
-    line-height: 1.45;
+    line-height: 1.4;
     margin-bottom: 0.25rem;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -1105,7 +1110,7 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 15%;
     right: 0;
     font-size: 10rem;
-    font-family: 'Noto Serif', 'SimSun', serif;
+    font-family: 'Spectral', 'SimSun', serif;
     font-weight: 900;
     color: rgba(166,138,62,0.03);
     line-height: 1;
@@ -1142,10 +1147,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .entry-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: var(--brown-deep);
     font-family: var(--font-heading);
+    font-weight: 600;
     margin-bottom: 0.5rem;
+    line-height: 1.25;
 }
 
 .entry-meta {
@@ -1162,13 +1169,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .entry-content {
     font-size: 1.05rem;
-    line-height: 1.85;
+    line-height: 1.9;
     color: var(--text-primary);
 }
 
 .entry-content p { margin-bottom: 1.25rem; }
-.entry-content h2 { font-size: 1.5rem; margin: 2rem 0 1rem; }
-.entry-content h3 { font-size: 1.25rem; margin: 1.5rem 0 0.75rem; }
+.entry-content h2 { font-size: 1.6rem; margin: 2rem 0 1rem; font-weight: 600; }
+.entry-content h3 { font-size: 1.35rem; margin: 1.5rem 0 0.75rem; font-weight: 600; }
 .entry-content img { border-radius: var(--radius); margin: 1rem 0; }
 
 .entry-content blockquote {
@@ -1451,9 +1458,10 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .page-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color: var(--brown-deep);
     font-family: var(--font-heading);
+    font-weight: 600;
 }
 
 .posts-list .card + .card { margin-top: 1rem; }
@@ -1633,7 +1641,8 @@ h1, h2, h3, h4, h5, h6 {
 .footer-col h4 {
     color: var(--gold);
     font-family: var(--font-heading);
-    font-size: 1.05rem;
+    font-size: 1.15rem;
+    font-weight: 600;
     margin-bottom: 1.2rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid rgba(200,168,78,0.2);
@@ -2151,7 +2160,7 @@ h1, h2, h3, h4, h5, h6 {
 
     .temple-plaque { padding: 1.5rem 1.5rem 0.8rem; }
     .logo-img { height: 65px; }
-    .logo-text { font-size: 1.6rem; letter-spacing: 0.08em; }
+    .logo-text { font-size: 1.8rem; letter-spacing: 0.08em; }
     .header-divider { padding: 0 2rem 1.2rem; }
     .header-frame { inset: 5px; }
 
@@ -2240,7 +2249,7 @@ h1, h2, h3, h4, h5, h6 {
     .footer-inner { grid-template-columns: 1fr; gap: 1.5rem; }
     .footer-about { grid-column: auto; }
 
-    .entry-title { font-size: 1.5rem; }
+    .entry-title { font-size: 1.7rem; }
 
     .error-content h1 { font-size: 4rem; }
 
@@ -2267,12 +2276,12 @@ h1, h2, h3, h4, h5, h6 {
         height: 100px;
     }
     .single-post .col-main::after,
-    .page-content .col-main::after {
+    .page .col-main::after {
         font-size: 6rem;
     }
     /* Simplify knot ornaments on inner pages for mobile */
     .single-post::before,
-    .page-content::before,
+    .page::before,
     .archive .site-main::before,
     .search .site-main::before,
     .error404 .site-main::before {
@@ -2301,7 +2310,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 480px) {
     .logo-img { height: 50px; }
-    .logo-text { font-size: 1.25rem; letter-spacing: 0.05em; }
+    .logo-text { font-size: 1.4rem; letter-spacing: 0.05em; }
     .temple-plaque { padding: 1.2rem 1rem 0.6rem; }
     .header-divider { padding: 0 1.5rem 1rem; }
     .divider-line { max-width: 100px; }
@@ -2309,7 +2318,7 @@ h1, h2, h3, h4, h5, h6 {
     .frame-corner { width: 24px; height: 24px; }
     .frame-corner::before { width: 16px; }
     .frame-corner::after { height: 16px; }
-    .section-title { font-size: 1.3rem; }
+    .section-title { font-size: 1.4rem; }
     /* Hide corner ornaments on very small screens */
     .section-nguoi::before,
     .section-hoatdong::before,

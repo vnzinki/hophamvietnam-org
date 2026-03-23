@@ -36,7 +36,7 @@ function hopham_enqueue() {
     // Google Fonts
     wp_enqueue_style(
         'hopham-google-fonts',
-        'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@400;700&display=swap',
+        'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap',
         [],
         null
     );
