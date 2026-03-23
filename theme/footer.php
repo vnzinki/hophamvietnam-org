@@ -1,7 +1,8 @@
 </main><!-- .site-main -->
 
 <footer class="site-footer">
-    <div class="footer-dragon-top"></div>
+    <!-- Chim Lạc decorative band — Dong Son bronze drum bird motif -->
+    <div class="chim-lac-band" aria-hidden="true"></div>
     <div class="footer-inner">
         <div class="footer-col footer-about">
             <h4>Thông tin</h4>

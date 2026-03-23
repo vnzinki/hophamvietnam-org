@@ -119,45 +119,46 @@ h1, h2, h3, h4, h5, h6 {
     overflow: hidden;
 }
 
-/* Dong Son bronze drum pattern — full background */
+/* Dong Son bronze drum — Chim Lạc birds watermark (from real Trống Đồng) */
 .plaque-drum-watermark {
     position: absolute;
     inset: 0;
     background: url('../images/drum-pattern-bg.svg') repeat;
-    background-size: 240px 100px;
-    opacity: 0.3;
+    background-size: 400px auto;
+    opacity: 0.15;
     pointer-events: none;
     z-index: 0;
+    mix-blend-mode: screen;
 }
 
-/* Dong Son triangle band — horizontal borders */
+/* Dong Son geometric band — horizontal borders (real drum pattern) */
 .plaque-border-top,
 .plaque-border-bottom {
     position: absolute;
     left: 8px;
     right: 8px;
-    height: 18px;
+    height: 22px;
     background: url('../images/drum-border.svg') repeat-x;
-    background-size: auto 18px;
+    background-size: auto 22px;
     pointer-events: none;
-    z-index: 0;
-    opacity: 0.5;
+    z-index: 1;
+    opacity: 0.45;
 }
 .plaque-border-top { top: 4px; }
 .plaque-border-bottom { bottom: 4px; }
 
-/* Dong Son triangle band — vertical side borders */
+/* Dong Son geometric band — vertical side borders */
 .plaque-pattern-left,
 .plaque-pattern-right {
     position: absolute;
-    top: 22px;
-    bottom: 22px;
-    width: 18px;
+    top: 26px;
+    bottom: 26px;
+    width: 22px;
     background: url('../images/drum-border-v.svg') repeat-y;
-    background-size: 18px auto;
+    background-size: 22px auto;
     pointer-events: none;
-    z-index: 0;
-    opacity: 0.5;
+    z-index: 1;
+    opacity: 0.45;
 }
 .plaque-pattern-left { left: 4px; }
 .plaque-pattern-right { right: 4px; transform: scaleX(-1); }
@@ -353,6 +354,36 @@ h1, h2, h3, h4, h5, h6 {
     height: 2px;
     background: var(--gold);
     transition: 0.3s;
+}
+
+/* Chim Lạc decorative band — Dong Son bronze drum birds */
+.chim-lac-band {
+    height: 32px;
+    background:
+        url('../images/drum-chim-lac-strip.svg') repeat-x center,
+        linear-gradient(180deg, #1A0A00 0%, #2C1200 40%, #3A1800 100%);
+    background-size: auto 32px, auto;
+    border-top: 1px solid rgba(200,168,78,0.25);
+    border-bottom: 2px solid rgba(200,168,78,0.3);
+    opacity: 0.65;
+    position: relative;
+}
+.chim-lac-band::before,
+.chim-lac-band::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    z-index: 1;
+}
+.chim-lac-band::before {
+    left: 0;
+    background: linear-gradient(90deg, #1A0A00 0%, transparent 100%);
+}
+.chim-lac-band::after {
+    right: 0;
+    background: linear-gradient(270deg, #1A0A00 0%, transparent 100%);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1008,31 +1039,7 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
 }
 
-/* Top dragon ornament */
-.footer-dragon-top {
-    height: 50px;
-    background:
-        linear-gradient(
-            180deg,
-            var(--gold-dark) 0%,
-            rgba(200,168,78,0.4) 20%,
-            rgba(200,168,78,0.1) 40%,
-            transparent 100%
-        );
-    position: relative;
-}
-
-.footer-dragon-top::before {
-    content: '龍 ❖ 龍';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--gold);
-    font-size: 1.2rem;
-    letter-spacing: 1rem;
-    opacity: 0.6;
-}
+/* Chim Lạc band is defined in the header section and reused here at footer top */
 
 .footer-inner {
     max-width: var(--container-max);

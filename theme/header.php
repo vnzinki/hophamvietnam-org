@@ -44,6 +44,7 @@
             </button>
         </div>
     </nav>
+
     <div class="search-overlay" id="searchOverlay">
         <div class="search-overlay-inner">
             <?php get_search_form(); ?>
