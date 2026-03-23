@@ -675,7 +675,7 @@ h1, h2, h3, h4, h5, h6 {
 .section-hoatdong > .container,
 .section-category > .container {
     position: relative;
-    padding: 1.2rem 0;
+    padding: 1.2rem 1.5rem;
 }
 
 .section-nguoi > .container::before,
