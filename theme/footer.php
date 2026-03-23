@@ -32,16 +32,16 @@
                 <span class="person-role">Chủ tịch</span>
                 <span class="person-name">Ts. Phạm Vũ Câu</span>
                 <span class="person-contact">
-                    <a href="tel:0913241718">☎ 0913 241 718</a>
-                    <a href="mailto:cauphamvu@gmail.com">✉ Email</a>
+                    <a href="tel:0913241718"><span class="ic">☎</span> 0913 241 718</a>
+                    <a href="mailto:cauphamvu@gmail.com"><span class="ic">✉</span> Email</a>
                 </span>
             </div>
             <div class="footer-person">
                 <span class="person-role">Tổng biên tập</span>
                 <span class="person-name">Phạm Duy Hưng</span>
                 <span class="person-contact">
-                    <a href="tel:0981188968">☎ 0981 188 968</a>
-                    <a href="mailto:tttlhpvn@gmail.com">✉ Email</a>
+                    <a href="tel:0981188968"><span class="ic">☎</span> 0981 188 968</a>
+                    <a href="mailto:tttlhpvn@gmail.com"><span class="ic">✉</span> Email</a>
                 </span>
             </div>
         </div>

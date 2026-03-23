@@ -1702,9 +1702,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .person-contact a {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     color: var(--cream-dark);
     transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.person-contact .ic {
+    font-size: 1.1rem;
+    line-height: 1;
 }
 .person-contact a:hover { color: var(--gold); }
 
