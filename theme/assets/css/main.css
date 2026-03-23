@@ -1110,9 +1110,9 @@ h1, h2, h3, h4, h5, h6 {
         0 -1px 0 rgba(200,168,78,0.15);
 }
 
-/* Corner ornaments on content pane */
+/* Corner ornaments on content pane (exclude homepage) */
 .single-post .col-main::before,
-.page .col-main::before {
+.page:not(.home) .col-main::before {
     content: '';
     position: absolute;
     inset: 6px;
@@ -1126,9 +1126,9 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0.4;
 }
 
-/* Chữ thọ watermark on article pages */
+/* Chữ thọ watermark on article pages (exclude homepage) */
 .single-post .col-main::after,
-.page .col-main::after {
+.page:not(.home) .col-main::after {
     content: '壽';
     position: absolute;
     bottom: 15%;
@@ -2417,7 +2417,7 @@ h1, h2, h3, h4, h5, h6 {
         height: 100px;
     }
     .single-post .col-main::after,
-    .page .col-main::after {
+    .page:not(.home) .col-main::after {
         font-size: 6rem;
     }
     /* Simplify knot ornaments on inner pages for mobile */
