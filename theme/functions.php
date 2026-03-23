@@ -160,3 +160,292 @@ function hopham_vn_date($post_id = null) {
     $year  = date('Y', $timestamp);
     return "$day $month $year";
 }
+
+/* ═══════════════════════════════════════════════════════════
+   SEO — Meta Tags, Open Graph, Twitter Cards, JSON-LD
+   ═══════════════════════════════════════════════════════════ */
+
+define('HOPHAM_SITE_NAME', 'Họ Phạm Việt Nam');
+define('HOPHAM_DEFAULT_DESC', 'Trang thông tin dòng họ Phạm Việt Nam — kết nối, bảo tồn và phát huy truyền thống văn hóa, lịch sử dòng họ Phạm.');
+define('HOPHAM_LOCALE', 'vi_VN');
+
+/**
+ * Generate meta description from content context.
+ */
+function hopham_get_meta_description() {
+    // Front page always uses default description
+    if (is_front_page() || is_home()) {
+        return HOPHAM_DEFAULT_DESC;
+    }
+
+    if (is_singular()) {
+        global $post;
+        if (!empty($post->post_excerpt)) {
+            return wp_strip_all_tags($post->post_excerpt);
+        }
+        $content = wp_strip_all_tags(strip_shortcodes($post->post_content));
+        $content = preg_replace('/\s+/', ' ', trim($content));
+        // Skip if content looks like shortcode remnants
+        if (empty($content) || mb_strpos($content, '[') === 0) {
+            return HOPHAM_DEFAULT_DESC;
+        }
+        return mb_substr($content, 0, 160, 'UTF-8') . (mb_strlen($content, 'UTF-8') > 160 ? '…' : '');
+    }
+
+    if (is_category() || is_tag() || is_tax()) {
+        $desc = term_description();
+        if ($desc) return wp_strip_all_tags($desc);
+    }
+
+    if (is_author()) {
+        $author = get_queried_object();
+        if ($author && !empty($author->description)) {
+            return wp_strip_all_tags($author->description);
+        }
+    }
+
+    if (is_search()) {
+        return 'Kết quả tìm kiếm cho "' . get_search_query() . '" trên ' . HOPHAM_SITE_NAME;
+    }
+
+    return HOPHAM_DEFAULT_DESC;
+}
+
+/**
+ * Get the best image URL for social sharing.
+ */
+function hopham_get_og_image() {
+    if (is_singular() && has_post_thumbnail()) {
+        $img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'hopham-hero');
+        if ($img) return $img[0];
+    }
+
+    // Fallback: site logo
+    $logo_id = get_theme_mod('custom_logo');
+    if ($logo_id) {
+        $img = wp_get_attachment_image_src($logo_id, 'full');
+        if ($img) return $img[0];
+    }
+
+    return HOPHAM_URI . '/assets/images/logo.png';
+}
+
+/**
+ * Output SEO meta tags in <head>.
+ */
+function hopham_seo_meta_tags() {
+    $desc     = hopham_get_meta_description();
+    $og_image = hopham_get_og_image();
+    $url      = is_singular() ? get_permalink() : home_url($_SERVER['REQUEST_URI'] ?? '/');
+
+    // Determine og:type
+    if (is_front_page()) {
+        $og_type = 'website';
+    } elseif (is_single()) {
+        $og_type = 'article';
+    } else {
+        $og_type = 'website';
+    }
+
+    // Build title
+    if (is_singular()) {
+        $og_title = get_the_title();
+    } elseif (is_category()) {
+        $og_title = single_cat_title('', false);
+    } elseif (is_tag()) {
+        $og_title = single_tag_title('', false);
+    } elseif (is_search()) {
+        $og_title = 'Tìm kiếm: ' . get_search_query();
+    } else {
+        $og_title = get_bloginfo('name');
+    }
+
+    echo "\n<!-- SEO — Họ Phạm Việt Nam -->\n";
+
+    // Meta description
+    if ($desc) {
+        printf('<meta name="description" content="%s">' . "\n", esc_attr($desc));
+    }
+
+    // Canonical URL
+    if (is_singular()) {
+        printf('<link rel="canonical" href="%s">' . "\n", esc_url(get_permalink()));
+    }
+
+    // Open Graph
+    printf('<meta property="og:locale" content="%s">' . "\n", esc_attr(HOPHAM_LOCALE));
+    printf('<meta property="og:type" content="%s">' . "\n", esc_attr($og_type));
+    printf('<meta property="og:title" content="%s">' . "\n", esc_attr($og_title));
+    if ($desc) {
+        printf('<meta property="og:description" content="%s">' . "\n", esc_attr($desc));
+    }
+    printf('<meta property="og:url" content="%s">' . "\n", esc_url($url));
+    printf('<meta property="og:site_name" content="%s">' . "\n", esc_attr(HOPHAM_SITE_NAME));
+    printf('<meta property="og:image" content="%s">' . "\n", esc_url($og_image));
+
+    // Article-specific OG tags
+    if (is_single()) {
+        printf('<meta property="article:published_time" content="%s">' . "\n", esc_attr(get_the_date('c')));
+        printf('<meta property="article:modified_time" content="%s">' . "\n", esc_attr(get_the_modified_date('c')));
+        $cats = get_the_category();
+        if ($cats) {
+            printf('<meta property="article:section" content="%s">' . "\n", esc_attr($cats[0]->name));
+        }
+        $tags = get_the_tags();
+        if ($tags) {
+            foreach ($tags as $tag) {
+                printf('<meta property="article:tag" content="%s">' . "\n", esc_attr($tag->name));
+            }
+        }
+    }
+
+    // Twitter Card
+    echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+    printf('<meta name="twitter:title" content="%s">' . "\n", esc_attr($og_title));
+    if ($desc) {
+        printf('<meta name="twitter:description" content="%s">' . "\n", esc_attr($desc));
+    }
+    printf('<meta name="twitter:image" content="%s">' . "\n", esc_url($og_image));
+
+    echo "<!-- /SEO -->\n";
+}
+add_action('wp_head', 'hopham_seo_meta_tags', 1);
+
+/**
+ * Output JSON-LD structured data.
+ */
+function hopham_seo_jsonld() {
+    $schemas = [];
+
+    // Organization schema (every page)
+    $schemas[] = [
+        '@type' => 'Organization',
+        'name'  => HOPHAM_SITE_NAME,
+        'url'   => home_url('/'),
+        'logo'  => HOPHAM_URI . '/assets/images/logo.png',
+    ];
+
+    // WebSite schema with search action (every page)
+    $schemas[] = [
+        '@type'           => 'WebSite',
+        'name'            => HOPHAM_SITE_NAME,
+        'url'             => home_url('/'),
+        'description'     => HOPHAM_DEFAULT_DESC,
+        'inLanguage'      => 'vi',
+        'potentialAction' => [
+            '@type'       => 'SearchAction',
+            'target'      => home_url('/?s={search_term_string}'),
+            'query-input' => 'required name=search_term_string',
+        ],
+    ];
+
+    // BreadcrumbList
+    $breadcrumbs = hopham_get_breadcrumbs();
+    if (!empty($breadcrumbs)) {
+        $items = [];
+        foreach ($breadcrumbs as $i => $crumb) {
+            $items[] = [
+                '@type'    => 'ListItem',
+                'position' => $i + 1,
+                'name'     => $crumb['name'],
+                'item'     => $crumb['url'],
+            ];
+        }
+        $schemas[] = [
+            '@type'           => 'BreadcrumbList',
+            'itemListElement' => $items,
+        ];
+    }
+
+    // Article schema (single posts)
+    if (is_single()) {
+        global $post;
+        $article = [
+            '@type'            => 'Article',
+            'headline'         => get_the_title(),
+            'url'              => get_permalink(),
+            'datePublished'    => get_the_date('c'),
+            'dateModified'     => get_the_modified_date('c'),
+            'author'           => [
+                '@type' => 'Person',
+                'name'  => get_the_author(),
+            ],
+            'publisher'        => [
+                '@type' => 'Organization',
+                'name'  => HOPHAM_SITE_NAME,
+                'logo'  => [
+                    '@type' => 'ImageObject',
+                    'url'   => HOPHAM_URI . '/assets/images/logo.png',
+                ],
+            ],
+            'mainEntityOfPage' => get_permalink(),
+        ];
+
+        if (has_post_thumbnail()) {
+            $img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'large');
+            if ($img) {
+                $article['image'] = [
+                    '@type'  => 'ImageObject',
+                    'url'    => $img[0],
+                    'width'  => $img[1],
+                    'height' => $img[2],
+                ];
+            }
+        }
+
+        $desc = hopham_get_meta_description();
+        if ($desc) {
+            $article['description'] = $desc;
+        }
+
+        $schemas[] = $article;
+    }
+
+    // Output
+    $graph = [
+        '@context' => 'https://schema.org',
+        '@graph'   => $schemas,
+    ];
+
+    echo '<script type="application/ld+json">' . "\n";
+    echo wp_json_encode($graph, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+    echo "\n</script>\n";
+}
+add_action('wp_head', 'hopham_seo_jsonld', 2);
+
+/**
+ * Build breadcrumb array for structured data.
+ */
+function hopham_get_breadcrumbs() {
+    $crumbs = [['name' => 'Trang chủ', 'url' => home_url('/')]];
+
+    if (is_singular()) {
+        $cats = get_the_category();
+        if ($cats) {
+            $crumbs[] = ['name' => $cats[0]->name, 'url' => get_category_link($cats[0]->term_id)];
+        }
+        $crumbs[] = ['name' => get_the_title(), 'url' => get_permalink()];
+    } elseif (is_category()) {
+        $crumbs[] = ['name' => single_cat_title('', false), 'url' => get_category_link(get_queried_object_id())];
+    } elseif (is_tag()) {
+        $crumbs[] = ['name' => single_tag_title('', false), 'url' => get_tag_link(get_queried_object_id())];
+    } elseif (is_search()) {
+        $crumbs[] = ['name' => 'Tìm kiếm: ' . get_search_query(), 'url' => get_search_link()];
+    }
+
+    return count($crumbs) > 1 ? $crumbs : [];
+}
+
+/**
+ * Customize document title separator and structure.
+ */
+function hopham_document_title_parts($title) {
+    $title['tagline'] = '';
+    return $title;
+}
+add_filter('document_title_parts', 'hopham_document_title_parts');
+
+function hopham_document_title_separator() {
+    return '—';
+}
+add_filter('document_title_separator', 'hopham_document_title_separator');
