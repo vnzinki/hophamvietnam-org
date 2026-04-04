@@ -31,10 +31,10 @@
     --link-color:     #7A3B10;
     --link-hover:     #A85820;
 
-    /* Fonts — tuned for Vietnamese readability & cultural feel */
-    --font-heading:   'Cormorant Garamond', 'Noto Serif', Georgia, serif;
-    --font-body:      'Be Vietnam Pro', 'Segoe UI', Tahoma, sans-serif;
-    --font-accent:    'Spectral', 'Noto Serif', Georgia, serif;
+    /* Fonts — following VNExpress typography for Vietnamese readability */
+    --font-heading:   'Merriweather', Georgia, serif;
+    --font-body:      Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    --font-accent:    'Merriweather', Georgia, serif;
 
     /* Spacing */
     --gap:            1.5rem;
@@ -52,12 +52,10 @@ body {
     font-family: var(--font-body);
     color: var(--text-primary);
     background: var(--parchment);
-    line-height: 1.8;
+    line-height: 1.6;
     font-size: 15px;
-    letter-spacing: 0.01em;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    font-feature-settings: 'kern' 1, 'liga' 1;
 }
 
 a {
@@ -72,9 +70,8 @@ img { max-width: 100%; height: auto; display: block; }
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     color: var(--brown-dark);
-    line-height: 1.3;
-    font-weight: 600;
-    letter-spacing: 0.01em;
+    line-height: 1.6;
+    font-weight: 700;
 }
 
 .container {
@@ -668,7 +665,7 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 10%;
     right: 3%;
     font-size: 12rem;
-    font-family: 'Spectral', 'SimSun', 'PMingLiU', serif;
+    font-family: 'Merriweather', 'SimSun', 'PMingLiU', serif;
     font-weight: 900;
     color: rgba(166,138,62,0.04);
     line-height: 1;
@@ -1134,7 +1131,7 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 15%;
     right: 0;
     font-size: 10rem;
-    font-family: 'Spectral', 'SimSun', serif;
+    font-family: 'Merriweather', 'SimSun', serif;
     font-weight: 900;
     color: rgba(166,138,62,0.03);
     line-height: 1;
@@ -1194,7 +1191,7 @@ h1, h2, h3, h4, h5, h6 {
 /* ── Post content typography ── */
 .entry-content {
     font-size: 1.08rem;
-    line-height: 2;
+    line-height: 1.8;
     color: var(--text-primary);
     max-width: 720px;
     text-align: justify;
