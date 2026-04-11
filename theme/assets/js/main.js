@@ -149,3 +149,8 @@ function initBrokenImageHandler() {
         if (e.target.tagName === 'IMG') handleBrokenImage(e.target);
     }, true);
 }
+
+/* ─── Exports (Node.js / Jest only) ──────────────────────── */
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { initSlider, initMobileMenu, initSearchOverlay, initBrokenImageHandler };
+}

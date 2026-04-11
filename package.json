@@ -1,0 +1,29 @@
+{
+  "name": "hophamvietnam-org",
+  "version": "1.0.0",
+  "description": "- Docker & Docker Compose - Git LFS (`brew install git-lfs && git lfs install`)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vnzinki/hophamvietnam-org.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/vnzinki/hophamvietnam-org/issues"
+  },
+  "homepage": "https://github.com/vnzinki/hophamvietnam-org#readme",
+  "devDependencies": {
+    "@jest/globals": "^30.3.0",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}
